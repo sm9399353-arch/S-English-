@@ -1,0 +1,3347 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>S English – آینده یادگیری روزانه</title>
+  <meta name="description" content="S English – اکوسیستم هوشمند، احساسی و آینده‌نگر برای یادگیری روزانه زبان. Crafted with Vision by سروش مسرور." />
+
+  <!-- CSP (best-effort in static HTML; real protection needs server headers) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; img-src 'self' https: data: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://smtpjs.com; connect-src 'self' https:;" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;500;600;700;800;900&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style>
+    :root {
+      /* Aurora Neon (Joyful, unique) */
+      --bg: #050716;
+      --panel: #0a0f27;
+      --muted: #a3b0c2;
+      --text: #eef4ff;
+      --primary: #00eaff;    /* hyper cyan */
+      --accent: #ff37d6;     /* bright magenta */
+      --secondary: #7cff3a;  /* neon green */
+      --sun: #ffd000;
+      --good: #34d399;
+      --warn: #ffb020;
+      --bad: #ff4d6d;
+      --glass: rgba(255,255,255,.08);
+      --ring: rgba(255,255,255,.10);
+    }
+    [data-theme="light"] {
+      --bg: #f6fbff;
+      --panel: #ffffff;
+      --muted: #1f2937;
+      --text: #0b1220;
+      --primary: #0284ff;
+      --accent: #ff2ec4;
+      --secondary: #16a34a;
+      --sun: #f59e0b;
+      --good: #059669;
+      --warn: #d97706;
+      --bad: #e11d48;
+      --glass: rgba(15,23,42,.06);
+      --ring: rgba(15,23,42,.10);
+    }
+
+    html, body { height: 100%; background: var(--bg); color: var(--text); }
+    .font-fa { font-family: "Vazirmatn", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans"; }
+    .font-en { font-family: "Inter", ui-sans-serif, system-ui; }
+
+    /* Hard lock: if not authenticated, appContent is not usable */
+    [data-auth="off"] #appContent { filter: blur(1.15px) saturate(.72) brightness(.90); pointer-events: none; user-select: none; }
+    [data-auth="off"] .focus-allowed { pointer-events: auto; }
+
+    /* Cinematic background: animated aurora + invisible grid */
+    .cinematic {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(900px 520px at 14% -10%, rgba(0,234,255,.22), transparent 60%),
+        radial-gradient(900px 520px at 92% 10%, rgba(255,55,214,.18), transparent 62%),
+        radial-gradient(750px 900px at 50% 120%, rgba(124,255,58,.12), transparent 65%),
+        radial-gradient(700px 700px at 70% 80%, rgba(255,208,0,.10), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0));
+    }
+    .aurora-shift::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        radial-gradient(700px 520px at 25% 25%, rgba(0,234,255,.16), transparent 60%),
+        radial-gradient(760px 560px at 78% 30%, rgba(255,55,214,.14), transparent 62%),
+        radial-gradient(700px 620px at 50% 78%, rgba(124,255,58,.10), transparent 65%);
+      filter: blur(0px);
+      animation: aurora 10s ease-in-out infinite;
+      opacity: .9;
+      pointer-events:none;
+    }
+    @keyframes aurora{
+      0%,100%{ transform: translate3d(-2%, -2%, 0) rotate(0deg) scale(1.02); }
+      50%{ transform: translate3d(2%, 3%, 0) rotate(6deg) scale(1.06); }
+    }
+
+    .grid-invisible {
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 26px 26px;
+    }
+    [data-theme="light"] .grid-invisible {
+      background-image:
+        linear-gradient(rgba(15,23,42,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,23,42,.05) 1px, transparent 1px);
+    }
+
+    /* Micro motion */
+    .float { animation: float 6s ease-in-out infinite; }
+    @keyframes float { 0%,100% { transform: translateY(0px);} 50% { transform: translateY(-10px);} }
+    .breath { animation: breath 5.5s ease-in-out infinite; }
+    @keyframes breath { 0%,100% { transform: scale(1);} 50% { transform: scale(1.02);} }
+
+    .shine { background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); background-size: 320% 100%; animation: shine 4s linear infinite; }
+    @keyframes shine { 0% { background-position: 320% 0; } 100% { background-position: -320% 0; } }
+
+    .cursor-blink::after { content: "|"; animation: blink 1s step-end infinite; margin-inline-start: .2rem; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* Phone mockup */
+    .phone {
+      width: 330px; height: 670px; border-radius: 40px; padding: 14px; position: relative;
+      background: linear-gradient(135deg, rgba(10,15,39,1), rgba(5,7,22,1));
+      box-shadow: 0 34px 96px rgba(0,0,0,.50), inset 0 0 0 1px rgba(255,255,255,.05);
+    }
+    [data-theme="light"] .phone {
+      background: linear-gradient(135deg, #eef6ff, #ffffff);
+      box-shadow: 0 30px 80px rgba(15,23,42,.14), inset 0 0 0 1px rgba(15,23,42,.10);
+    }
+    .phone .glass { position:absolute; inset:0; border-radius:40px; box-shadow: inset 0 0 56px rgba(255,255,255,.04); pointer-events:none; }
+    .screen { height: 100%; border-radius: 30px; overflow: hidden; background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); backdrop-filter: blur(10px); }
+
+    /* Hide scrollbars */
+    .screen::-webkit-scrollbar { display: none; }
+    .screen { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Gauges */
+    .ring {
+      width: 120px; height: 120px; border-radius: 999px;
+      background: conic-gradient(var(--primary) calc(var(--val) * 1%), var(--ring) 0);
+      position: relative;
+      box-shadow: 0 0 30px rgba(0,234,255,.16);
+    }
+    .ring::before { content:""; position:absolute; inset:10px; background: var(--panel); border-radius:999px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.10); }
+
+    /* Card spring interactions */
+    .card { touch-action: none; }
+    .shadow-elev { box-shadow: 0 22px 44px rgba(0,0,0,.36), 0 10px 22px rgba(0,0,0,.22); }
+
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 16px var(--primary); }
+    .section { scroll-margin-top: 92px; }
+
+    /* Focus mode */
+    [data-focus="on"] *:not(.focus-allowed) { transition: filter .35s ease; filter: saturate(.60) blur(.2px) brightness(.94); }
+
+    /* Tooltip */
+    .tooltip { position: relative; }
+    .tooltip:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      white-space: nowrap;
+      bottom: 120%;
+      right: 0;
+      background: rgba(0,0,0,.75);
+      color:#fff;
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-size: .75rem;
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    /* Toasts */
+    #toasts { position: fixed; bottom: 18px; right: 18px; z-index: 80; display:flex; flex-direction:column; gap:10px; max-width: min(420px, calc(100vw - 36px)); }
+    .toast { border-radius: 16px; padding: 10px 12px; border: 1px solid rgba(255,255,255,.14); background: rgba(0,0,0,.46); backdrop-filter: blur(12px); box-shadow: 0 16px 32px rgba(0,0,0,.30); }
+    [data-theme="light"] .toast { background: rgba(255,255,255,.78); }
+
+    /* Modal */
+    .modal-backdrop { position: fixed; inset: 0; z-index: 90; background: rgba(0,0,0,.58); backdrop-filter: blur(12px); display:none; }
+    .modal-backdrop[data-open="true"] { display:block; }
+
+    /* premium separators */
+    .hairline { border: 1px solid rgba(255,255,255,.12); }
+    [data-theme="light"] .hairline { border-color: rgba(15,23,42,.12); }
+
+    /* Stars */
+    .star { filter: drop-shadow(0 0 10px rgba(255,208,0,.18)); }
+    .star[data-on="true"] { color: #ffd34d; }
+    .star[data-on="false"] { color: rgba(255,255,255,.32); }
+    [data-theme="light"] .star[data-on="false"] { color: rgba(15,23,42,.26); }
+
+    /* Floating assistant */
+    #assistantFab { position: fixed; left: 16px; bottom: 16px; z-index: 85; }
+
+    /* reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .float,.breath,.shine,.aurora-shift::before { animation: none !important; }
+    }
+  </style>
+</head>
+<body class="font-fa" data-theme="dark" data-focus="off" data-auth="off">
+  <!-- Toasts -->
+  <div id="toasts" class="font-fa"></div>
+
+  <!-- Assistant FAB (always visible; requires auth to use) -->
+  <div id="assistantFab" class="focus-allowed">
+    <button id="assistantOpen" class="focus-allowed tooltip" data-tip="دستیار" aria-label="assistant">
+      <span class="inline-flex items-center gap-2 rounded-2xl px-3 py-2 border border-white/10 bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-black shadow-elev hover:scale-[1.02] active:scale-[.98] transition">
+        <span class="font-extrabold">S‑Mind</span>
+        <span class="text-xs">کمک فوری</span>
+      </span>
+    </button>
+  </div>
+
+  <!-- Assistant Modal -->
+  <div id="assistantModal" class="modal-backdrop" data-open="false" aria-hidden="true">
+    <div class="min-h-full flex items-end sm:items-center justify-center p-4">
+      <div class="w-full max-w-xl rounded-3xl bg-white/5 border border-white/10 shadow-elev overflow-hidden">
+        <div class="p-5 sm:p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] flex items-center justify-center text-black font-extrabold">S</div>
+              <div>
+                <div class="text-sm font-bold">دستیار S‑Mind</div>
+                <div class="text-[12px] text-white/65">راهنما + آموزشی • امن • دقیق</div>
+              </div>
+            </div>
+            <button id="assistantClose" class="focus-allowed tooltip" data-tip="بستن" aria-label="close">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10">✕</span>
+            </button>
+          </div>
+
+          <div class="mt-4 rounded-2xl bg-black/20 border border-white/10 p-3">
+            <div id="assistantChat" class="space-y-2 text-sm max-h-[45vh] overflow-auto"></div>
+          </div>
+
+          <div class="mt-3 flex gap-2">
+            <input id="assistantInput" class="focus-allowed w-full bg-transparent border border-white/15 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]/40" placeholder="سؤال درباره سایت/یادگیری…" />
+            <button id="assistantSend" class="focus-allowed px-4 py-2 rounded-xl bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-black text-sm font-bold">ارسال</button>
+          </div>
+
+          <div class="mt-3 text-[12px] text-white/55">
+            سیاست: فقط پاسخ مرتبط با S English، یادگیری و مشکلات کاربری. هیچ اطلاعات مدیریتی/امنیتی افشا نمی‌شود.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div id="authModal" class="modal-backdrop" data-open="false" aria-hidden="true">
+    <div class="min-h-full flex items-center justify-center p-4">
+      <div class="w-full max-w-lg rounded-3xl bg-white/5 border border-white/10 shadow-elev overflow-hidden">
+        <div class="p-5 sm:p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] flex items-center justify-center text-black font-bold">S</div>
+              <div>
+                <div class="text-sm font-bold">ثبت‌نام / ورود</div>
+                <div class="text-[12px] text-white/65">کد یکبارمصرف (OTP) • سریع • امن</div>
+              </div>
+            </div>
+            <button id="authClose" class="focus-allowed tooltip" data-tip="بستن" aria-label="close">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10">✕</span>
+            </button>
+          </div>
+
+          <!-- Honeypot (invisible to users) -->
+          <input id="hpWebsite" class="hidden" tabindex="-1" autocomplete="off" />
+
+          <div class="mt-5 grid gap-3">
+            <label class="text-xs text-white/70">نام کامل</label>
+            <input id="authName" type="text" class="focus-allowed w-full bg-transparent border border-white/15 rounded-2xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-cyan-500/40" placeholder="مثلاً: سروش" autocomplete="name" />
+
+            <label class="text-xs text-white/70">ایمیل</label>
+            <input id="authEmail" type="email" class="focus-allowed w-full bg-transparent border border-white/15 rounded-2xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-cyan-500/40" placeholder="مثلاً: you@example.com" autocomplete="email" />
+
+            <div class="grid sm:grid-cols-2 gap-2">
+              <div>
+                <label class="text-xs text-white/70">چگونه آشنا شدی؟</label>
+                <select id="authSource" class="focus-allowed mt-2 w-full bg-transparent border border-white/15 rounded-2xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-cyan-500/40">
+                  <option value="" selected>انتخاب…</option>
+                  <option value="instagram">اینستاگرام</option>
+                  <option value="youtube">یوتیوب</option>
+                  <option value="friend">معرفی دوست</option>
+                  <option value="search">جستجو</option>
+                  <option value="other">سایر</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-xs text-white/70">کد اختصاصی (اختیاری)</label>
+                <input id="authSecret" type="password" class="focus-allowed mt-2 w-full bg-transparent border border-white/15 rounded-2xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[var(--accent)]/40" placeholder="—" autocomplete="off" />
+              </div>
+            </div>
+
+            <div id="authSourceOtherWrap" class="hidden">
+              <label class="text-xs text-white/70">سایر (توضیح کوتاه)</label>
+              <input id="authSourceOther" type="text" class="focus-allowed w-full bg-transparent border border-white/15 rounded-2xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-cyan-500/40" placeholder="مثلاً: تلگرام" />
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-2">
+              <button id="sendCode" class="focus-allowed px-4 py-3 rounded-2xl bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-black text-sm font-extrabold hover:scale-[1.01] active:scale-[.99] transition">ارسال کد یکبارمصرف</button>
+              <button id="demoInbox" class="focus-allowed px-4 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 text-sm">نمایش صندوق داخلی (دمو)</button>
+            </div>
+
+            <div id="otpArea" class="hidden mt-3">
+              <div class="flex items-center justify-between">
+                <label class="text-xs text-white/70">کد تایید</label>
+                <span id="otpHint" class="text-[11px] text-white/50">کد ۶ رقمی • اعتبار ۹۰ ثانیه</span>
+              </div>
+              <div class="mt-2 flex gap-2">
+                <input id="authCode" inputmode="numeric" maxlength="6" class="focus-allowed w-full bg-transparent border border-white/15 rounded-2xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-cyan-500/40" placeholder="------" />
+                <button id="verifyCode" class="focus-allowed px-4 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 text-sm font-bold">تایید</button>
+              </div>
+
+              <div id="otpDelivery" class="mt-3 rounded-2xl bg-black/20 border border-white/10 p-3">
+                <div class="text-[12px] text-white/70">وضعیت تحویل:</div>
+                <div id="otpDeliveryStatus" class="mt-1 text-[12px] text-white/60">—</div>
+                <div class="mt-2 text-[12px] text-white/60">اگر سرویس ایمیل واقعی فعال باشد، کد به ایمیل ارسال می‌شود. در حالت استاتیک، کد در صندوق داخلی + (در صورت مجوز مرورگر) کلیپ‌بورد قرار می‌گیرد.</div>
+                <div class="mt-2 flex flex-wrap items-center gap-2">
+                  <button id="otpReveal" class="focus-allowed px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-[12px]">نمایش کد (فقط دمو)</button>
+                  <span id="otpRevealText" class="text-[12px] text-white/70 font-en" dir="ltr"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3 rounded-2xl bg-black/20 border border-white/10 p-4">
+              <div class="text-xs text-white/70">قانون سیستم:</div>
+              <ul class="mt-2 space-y-1 text-[12px] text-white/60">
+                <li>• بدون ورود، هیچ داده‌ای ذخیره نمی‌شود و هیچ صفحه‌ای قابل استفاده نیست.</li>
+                <li>• همه رخدادها Timestamp می‌شوند (Audit Trail).</li>
+                <li>• هر روز دقیقاً ساعت ۰۰:۰۰ «۱۰ کلمه جدید/مرور» ساخته می‌شود.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="px-5 sm:px-6 py-4 border-t border-white/10 bg-black/10 flex items-center justify-between">
+          <div class="text-[11px] text-white/55">Crafted with Vision by سروش مسرور</div>
+          <div class="text-[11px] text-white/55">S English v3 Ultra</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback Modal -->
+  <div id="feedbackModal" class="modal-backdrop" data-open="false" aria-hidden="true">
+    <div class="min-h-full flex items-center justify-center p-4">
+      <div class="w-full max-w-lg rounded-3xl bg-white/5 border border-white/10 shadow-elev overflow-hidden">
+        <div class="p-5 sm:p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[var(--sun)] via-[var(--accent)] to-[var(--primary)] flex items-center justify-center text-black font-extrabold">★</div>
+              <div>
+                <div class="text-sm font-bold">نظر شما</div>
+                <div class="text-[12px] text-white/65">امتیازدهی + پیشنهاد برای بهتر شدن</div>
+              </div>
+            </div>
+            <button id="feedbackClose" class="focus-allowed tooltip" data-tip="بستن" aria-label="close">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10">✕</span>
+            </button>
+          </div>
+
+          <div class="mt-5">
+            <div class="text-xs text-white/70">امتیاز</div>
+            <div class="mt-2 flex items-center gap-2" dir="ltr">
+              <button class="focus-allowed star text-2xl" data-star="1" data-on="false" aria-label="1">★</button>
+              <button class="focus-allowed star text-2xl" data-star="2" data-on="false" aria-label="2">★</button>
+              <button class="focus-allowed star text-2xl" data-star="3" data-on="false" aria-label="3">★</button>
+              <button class="focus-allowed star text-2xl" data-star="4" data-on="false" aria-label="4">★</button>
+              <button class="focus-allowed star text-2xl" data-star="5" data-on="false" aria-label="5">★</button>
+              <span id="feedbackScore" class="ms-2 text-xs text-white/70">—</span>
+            </div>
+
+            <div class="mt-4">
+              <div class="text-xs text-white/70">متن نظر</div>
+              <textarea id="feedbackText" rows="4" class="focus-allowed mt-2 w-full bg-transparent border border-white/15 rounded-2xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[var(--accent)]/40" placeholder="چیزی که دوست داشتی/نداشتی، یا پیشنهاد برای بهتر شدن…"></textarea>
+            </div>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              <button id="feedbackSend" class="focus-allowed px-4 py-3 rounded-2xl bg-gradient-to-r from-[var(--sun)] via-[var(--accent)] to-[var(--primary)] text-black text-sm font-extrabold hover:scale-[1.01] active:scale-[.99] transition">ارسال به ایمیل مدیر</button>
+              <button id="feedbackSaveOnly" class="focus-allowed px-4 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 text-sm">فقط ذخیره</button>
+              <span id="feedbackStatus" class="text-[12px] text-white/55 self-center">—</span>
+            </div>
+
+            <div class="mt-4 rounded-2xl bg-black/20 border border-white/10 p-4">
+              <div class="text-xs text-white/70">مسیر ارسال:</div>
+              <div class="mt-2 text-[12px] text-white/60">به ایمیل مخفی مدیر: <span class="font-en" dir="ltr">sm9399353@gmail.com</span>. اگر سرویس ایمیل واقعی فعال باشد مستقیم ارسال می‌شود؛ در غیر این‌صورت یک ایمیل آماده باز می‌شود (mailto) + متن در کلیپ‌بورد کپی می‌شود.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="px-5 sm:px-6 py-4 border-t border-white/10 bg-black/10 flex items-center justify-between">
+          <div class="text-[11px] text-white/55">Crafted with Vision by سروش مسرور</div>
+          <button id="feedbackNeedAuth" class="focus-allowed text-[12px] text-white/70 hover:text-white">ورود برای ذخیره‌سازی دقیق</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Modal (Admin Panel - only for Super Admin) -->
+  <div id="adminModal" class="modal-backdrop" data-open="false" aria-hidden="true">
+    <div class="min-h-full flex items-center justify-center p-4">
+      <div class="w-full max-w-6xl rounded-3xl bg-white/5 border border-white/10 shadow-elev overflow-hidden">
+        <div class="p-4 sm:p-6 border-b border-white/10 bg-black/10">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[var(--sun)] via-[var(--accent)] to-[var(--primary)] flex items-center justify-center text-black font-extrabold">🛡️</div>
+              <div>
+                <div class="text-sm font-extrabold">پنل مدیر</div>
+                <div class="text-[12px] text-white/65">Users • Presence • Logs</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="adminExport" class="focus-allowed px-3 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs">Export JSON</button>
+              <label class="focus-allowed px-3 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs cursor-pointer">
+                Import JSON
+                <input id="adminImport" type="file" accept="application/json" class="hidden" />
+              </label>
+              <button id="adminClose" class="focus-allowed tooltip" data-tip="بستن" aria-label="close">
+                <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10">✕</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-4 flex flex-wrap gap-2">
+            <button class="focus-allowed adminTab px-3 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs" data-tab="users">Users</button>
+            <button class="focus-allowed adminTab px-3 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs" data-tab="audit">Audit</button>
+            <button class="focus-allowed adminTab px-3 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs" data-tab="security">Security AI</button>
+            <button class="focus-allowed adminTab px-3 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs" data-tab="emails">Emails</button>
+            <button class="focus-allowed adminTab px-3 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs" data-tab="feedback">Feedback</button>
+            <button class="focus-allowed adminTab px-3 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs" data-tab="settings">Settings</button>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-6">
+          <!-- USERS -->
+          <div id="adminTab_users" class="adminPanel hidden">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <div class="text-sm font-bold">Users</div>
+                <div id="adminPresenceSummary" class="mt-1 text-[12px] text-white/60">—</div>
+              </div>
+              <div class="flex gap-2">
+                <input id="adminUserSearch" class="focus-allowed bg-transparent border border-white/15 rounded-xl px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-[var(--primary)]/40" placeholder="Search email/name…" />
+                <select id="adminUserFilter" class="focus-allowed bg-transparent border border-white/15 rounded-xl px-3 py-2 text-xs outline-none">
+                  <option value="all" selected>All</option>
+                  <option value="online">Online</option>
+                  <option value="offline">Offline</option>
+                  <option value="logout">Logged out</option>
+                  <option value="started">Started (OTP only)</option>
+                  <option value="active">Active</option>
+                  <option value="suspended">Suspended</option>
+                  <option value="admin">Admins</option>
+                </select>
+              </div>
+            </div>
+            <div id="adminUsers" class="mt-3 overflow-auto rounded-2xl border border-white/10"></div>
+          </div>
+
+          <!-- AUDIT -->
+          <div id="adminTab_audit" class="adminPanel hidden">
+            <div class="flex items-center justify-between">
+              <div class="text-sm font-bold">Audit Trail (Immutable)</div>
+              <button id="adminClearAudit" class="focus-allowed px-3 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs">Clear (local only)</button>
+            </div>
+            <div id="adminAudit" class="mt-3 overflow-auto rounded-2xl border border-white/10"></div>
+            <div class="mt-2 text-[12px] text-white/55">نکته: این نسخه استاتیک است و داده‌ها در مرورگر ذخیره می‌شوند. برای سطح بانکی واقعی باید Backend اضافه شود.</div>
+          </div>
+
+          <!-- SECURITY -->
+          <div id="adminTab_security" class="adminPanel hidden">
+            <div class="text-sm font-bold">Security AI – Risk Monitor</div>
+            <div class="mt-2 grid md:grid-cols-3 gap-3">
+              <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+                <div class="text-xs text-white/60">System Risk</div>
+                <div id="adminSysRisk" class="mt-1 text-2xl font-extrabold font-en" dir="ltr">—</div>
+                <div id="adminSysRiskHint" class="mt-1 text-[12px] text-white/60">—</div>
+              </div>
+              <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+                <div class="text-xs text-white/60">Last Security Event</div>
+                <div id="adminLastSec" class="mt-1 text-sm text-white/85">—</div>
+              </div>
+              <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+                <div class="text-xs text-white/60">Suggested Hardening</div>
+                <div id="adminSecSuggest" class="mt-1 text-sm text-white/85">—</div>
+              </div>
+            </div>
+            <div id="adminSecurity" class="mt-3 overflow-auto rounded-2xl border border-white/10"></div>
+          </div>
+
+          <!-- EMAILS -->
+          <div id="adminTab_emails" class="adminPanel hidden">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="text-sm font-bold">Email Intelligence</div>
+              <button id="adminTestEmail" class="focus-allowed px-3 py-2 rounded-xl bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-black text-xs font-bold">Send Test Email</button>
+            </div>
+            <div class="mt-2 text-[12px] text-white/60">برای ارسال واقعی OTP/Feedback باید در Settings سرویس ایمیل را فعال کنید (EmailJS یا SMTPJS).</div>
+            <div id="adminEmails" class="mt-3 overflow-auto rounded-2xl border border-white/10"></div>
+          </div>
+
+          <!-- FEEDBACK -->
+          <div id="adminTab_feedback" class="adminPanel hidden">
+            <div class="text-sm font-bold">Feedback Inbox (Stars + Sentiment)</div>
+            <div id="adminFeedback" class="mt-3 overflow-auto rounded-2xl border border-white/10"></div>
+          </div>
+
+          <!-- SETTINGS -->
+          <div id="adminTab_settings" class="adminPanel hidden">
+            <div class="text-sm font-bold">Delivery Settings (Email Providers)</div>
+            <div class="mt-2 grid lg:grid-cols-2 gap-4">
+              <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+                <div class="text-sm font-semibold">EmailJS</div>
+                <div class="text-[12px] text-white/60">بهترین گزینه برای سایت استاتیک. در EmailJS یک Template بسازید و کلیدها را اینجا قرار دهید.</div>
+                <div class="mt-3 grid gap-2">
+                  <label class="text-[12px] text-white/65">Enabled</label>
+                  <select id="cfgEmailjsEnabled" class="focus-allowed bg-transparent border border-white/15 rounded-xl px-3 py-2 text-xs">
+                    <option value="false" selected>false</option>
+                    <option value="true">true</option>
+                  </select>
+                  <label class="text-[12px] text-white/65">Public Key</label>
+                  <input id="cfgEmailjsPublic" class="focus-allowed bg-transparent border border-white/15 rounded-xl px-3 py-2 text-xs" placeholder="e.g. 2Jxxxx" />
+                  <label class="text-[12px] text-white/65">Service ID</label>
+                  <input id="cfgEmailjsService" class="focus-allowed bg-transparent border border-white/15 rounded-xl px-3 py-2 text-xs" placeholder="service_xxx" />
+                  <label class="text-[12px] text-white/65">Template ID</label>
+                  <input id="cfgEmailjsTemplate" class="focus-allowed bg-transparent border border-white/15 rounded-xl px-3 py-2 text-xs" placeholder="template_xxx" />
+                </div>
+              </div>
+
+              <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+                <div class="text-sm font-semibold">SMTPJS</div>
+                <div class="text-[12px] text-white/60">اگر SecureToken دارید می‌توانید فعال کنید. (در غیر این صورت EmailJS پیشنهاد می‌شود.)</div>
+                <div class="mt-3 grid gap-2">
+                  <label class="text-[12px] text-white/65">Enabled</label>
+                  <select id="cfgSmtpEnabled" class="focus-allowed bg-transparent border border-white/15 rounded-xl px-3 py-2 text-xs">
+                    <option value="false" selected>false</option>
+                    <option value="true">true</option>
+                  </select>
+                  <label class="text-[12px] text-white/65">SecureToken</label>
+                  <input id="cfgSmtpToken" class="focus-allowed bg-transparent border border-white/15 rounded-xl px-3 py-2 text-xs" placeholder="SecureToken" />
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 flex flex-wrap items-center gap-2">
+              <button id="cfgSave" class="focus-allowed px-4 py-2 rounded-xl bg-gradient-to-r from-[var(--sun)] via-[var(--accent)] to-[var(--primary)] text-black text-xs font-bold">Save Settings</button>
+              <button id="cfgReset" class="focus-allowed px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs">Reset</button>
+              <span id="cfgStatus" class="text-[12px] text-white/55">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="px-4 sm:px-6 py-4 border-t border-white/10 bg-black/10 flex items-center justify-between">
+          <div class="text-[11px] text-white/55">Designed & Managed by سروش مسرور</div>
+          <div class="text-[11px] text-white/55">Admin Only • No Backdoor</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lock Overlay (no dismiss) -->
+  <div id="lockOverlay" class="fixed inset-0 z-[70]">
+    <div class="absolute inset-0 bg-black/45 backdrop-blur"></div>
+    <div class="relative min-h-full flex items-end sm:items-center justify-center p-4">
+      <div class="w-full max-w-xl rounded-3xl bg-white/5 border border-white/10 shadow-elev overflow-hidden">
+        <div class="p-5 sm:p-6">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] flex items-center justify-center text-black font-bold">S</div>
+            <div>
+              <div class="text-lg font-extrabold">ورود اجباری برای دسترسی کامل</div>
+              <div class="text-sm text-white/70">بدون ورود، هیچ داده‌ای ذخیره نمی‌شود و سیستم قابل استفاده نیست.</div>
+            </div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <button id="openAuth" class="focus-allowed px-4 py-3 rounded-2xl bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-black text-sm font-extrabold">ثبت‌نام / ورود</button>
+          </div>
+          <div class="mt-3 text-[12px] text-white/55">A Global Learning Masterpiece — سروش مسرور</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="fixed top-0 inset-x-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-black/30 border-b border-white/5">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] flex items-center justify-center text-black font-bold">S</div>
+        <div class="leading-tight">
+          <div class="text-sm text-white/85">S English</div>
+          <div class="text-[10px] text-white/50">The Future of Daily Learning</div>
+        </div>
+      </div>
+
+      <!-- Main Clock (one place) -->
+      <div class="flex items-center gap-3 rounded-2xl px-3 py-2 bg-white/5 border border-white/10 max-w-[54vw] overflow-x-auto whitespace-nowrap">
+        <div class="text-xs text-white/60">⏱️</div>
+        <div id="mainClock" class="text-xs font-en text-white/90" dir="ltr">—</div>
+        <div class="w-px h-4 bg-white/10"></div>
+        <div id="mainDate" class="hidden sm:block text-xs text-white/70">—</div>
+        <div id="mainDateShort" class="sm:hidden text-xs text-white/70">—</div>
+        <div class="w-px h-4 bg-white/10"></div>
+        <div class="text-xs text-white/60">تا ۰۰:۰۰:</div>
+        <div id="midnightCountdown" class="text-xs font-en text-white/90" dir="ltr">—</div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="modeToggle" class="focus-allowed tooltip" data-tip="حالت تیره/روشن" aria-label="Theme">
+          <span class="inline-flex items-center gap-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 text-xs">
+            <span id="modeIcon">🌙</span>
+            <span class="hidden sm:inline">نمایش</span>
+          </span>
+        </button>
+        <button id="focusToggle" class="focus-allowed tooltip" data-tip="Focus Mode" aria-label="Focus">
+          <span class="inline-flex items-center gap-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 text-xs">
+            <span>🎯</span>
+            <span class="hidden sm:inline">تمرکز</span>
+          </span>
+        </button>
+        <button id="feedbackBtn" class="focus-allowed tooltip" data-tip="نظرت رو بگو" aria-label="Feedback">
+          <span class="inline-flex items-center gap-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 text-xs">
+            <span>⭐</span>
+            <span class="hidden sm:inline">نظر</span>
+          </span>
+        </button>
+
+        <button id="adminBtn" class="focus-allowed hidden tooltip" data-tip="پنل مدیر" aria-label="Admin">
+          <span class="inline-flex items-center gap-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 text-xs">
+            <span>🛡️</span>
+            <span class="hidden sm:inline">مدیر</span>
+          </span>
+        </button>
+
+        <div class="hidden sm:flex items-center gap-2">
+          <button id="authBtn" class="focus-allowed inline-flex items-center gap-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 text-xs">
+            <span id="authStateDot" class="w-2.5 h-2.5 rounded-full bg-white/30"></span>
+            <span id="authStateText">ورود</span>
+          </button>
+          <button id="logoutBtn" class="focus-allowed hidden inline-flex items-center gap-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 text-xs">خروج</button>
+        </div>
+
+        <a href="#learn" class="focus-allowed inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-black px-4 py-2 text-xs font-bold hover:scale-[1.02] active:scale-[.98] transition">شروع تحول</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="appContent">
+    <!-- Hero -->
+    <section class="section cinematic grid-invisible aurora-shift pt-28 md:pt-32 pb-16 md:pb-24 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-[.25]">
+        <canvas id="particles" class="w-full h-full"></canvas>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="space-y-6">
+            <div class="inline-flex items-center gap-2 text-[12px] text-white/65 bg-white/5 border border-white/10 rounded-full px-3 py-1 w-fit">
+              <span class="dot"></span>
+              آینده یادگیری روزانه – آرام، هوشمند، اعتیادآور و دقیق
+            </div>
+
+            <h1 class="text-3xl md:text-5xl leading-[1.2] font-extrabold tracking-tight">
+              <span class="block text-white/90">S English</span>
+              <span id="typeTarget" class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] cursor-blink">&nbsp;</span>
+            </h1>
+
+            <p class="text-white/75 text-sm md:text-base max-w-xl">اکوسیستم یادگیری روزانه: ۱۰ کلمه، تصمیم‌گیری هوشمند، ذخیره‌سازی دقیق، انگیزهٔ انسانی. «تو می‌تونی، من کنارت هستم».</p>
+
+            <div class="flex flex-wrap items-center gap-3">
+              <button id="heroStart" class="focus-allowed inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-black px-5 py-3 text-sm font-extrabold hover:scale-[1.02] active:scale-[.99] transition">🚀 شروع تحول</button>
+              <a href="#future" class="focus-allowed inline-flex items-center gap-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 px-5 py-3 text-sm">👁️ دیدن آینده یادگیری</a>
+              <span class="text-xs text-white/55">Crafted with Vision by سروش مسرور</span>
+            </div>
+
+            <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+              <div class="flex items-center justify-between">
+                <div class="text-sm font-semibold">وضعیت امروز</div>
+                <div class="text-xs text-white/60">روز: <span id="todayKey" class="font-en" dir="ltr">—</span></div>
+              </div>
+              <div class="mt-3 grid sm:grid-cols-3 gap-3 text-xs">
+                <div class="rounded-xl p-3 bg-white/5 border border-white/10">
+                  <div class="text-white/60">۱۰ کلمه امروز</div>
+                  <div id="dailyMode" class="mt-1 text-white/90">Engine آماده</div>
+                </div>
+                <div class="rounded-xl p-3 bg-white/5 border border-white/10">
+                  <div class="text-white/60">تا تغییر</div>
+                  <div id="midnightCountdown2" class="mt-1 font-en text-white/90" dir="ltr">—</div>
+                </div>
+                <div class="rounded-xl p-3 bg-white/5 border border-white/10">
+                  <div class="text-white/60">وضعیت</div>
+                  <div id="heroAuthText" class="mt-1 text-white/90">—</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+              <div class="flex items-center justify-between">
+                <div class="text-sm font-semibold">پیام سیستم</div>
+                <div class="text-xs text-white/60">Audit: <span id="auditPulse" class="font-en" dir="ltr">—</span></div>
+              </div>
+              <div id="systemMsg" class="mt-2 text-xs text-white/70">—</div>
+            </div>
+          </div>
+
+          <div class="flex justify-center md:justify-end">
+            <div class="phone breath shadow-elev">
+              <div class="screen overflow-y-auto">
+                <div class="p-4 space-y-4">
+                  <div class="flex items-center justify-between">
+                    <div id="phoneTime" class="text-xs text-white/60">—</div>
+                    <div class="text-xs text-white/60 font-en" dir="ltr">Secure • Logged • Synced*</div>
+                  </div>
+
+                  <div class="rounded-2xl p-4 bg-gradient-to-br from-[color:rgba(0,234,255,.22)] via-[color:rgba(255,55,214,.12)] to-[color:rgba(124,255,58,.10)] border border-white/10">
+                    <div class="text-xs text-white/75">Daily Focus</div>
+                    <div class="text-xl font-bold mt-1">۱۰ کلمه امروز</div>
+                    <div class="text-white/65 text-xs mt-1">زمان طلایی: <span id="goldenTime" class="text-[var(--primary)]">—</span></div>
+                    <div class="mt-3 flex items-center gap-3">
+                      <div class="ring" id="phoneBrain" style="--val:20">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                          <div class="text-center text-xs">
+                            <div class="text-white/60">Brain</div>
+                            <div id="phoneBrainVal" class="font-bold">20%</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="text-sm font-semibold">بار شناختی زنده</div>
+                        <div class="text-xs text-white/65">سیستم با سرعت شما تطبیق می‌دهد…</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-3">
+                    <div class="rounded-xl bg-white/5 border border-white/10 p-3">
+                      <div class="text-[10px] text-white/50">کلمه بعدی</div>
+                      <div id="nextWord" class="text-lg font-bold font-en" dir="ltr">—</div>
+                      <div id="nextMeaning" class="text-xs text-white/60">—</div>
+                    </div>
+                    <div class="rounded-xl bg-white/5 border border-white/10 p-3">
+                      <div class="text-[10px] text-white/50">Emotion</div>
+                      <div id="nextEmotion" class="text-lg">—</div>
+                    </div>
+                  </div>
+
+                  <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+                    <div class="text-sm font-semibold">چالش امروز</div>
+                    <div class="text-xs text-white/65">۳ دقیقه – ۵ فلش‌کارت – ۱ تمرین صدا</div>
+                    <div class="flex gap-2 mt-3">
+                      <button id="miniStart" class="focus-allowed inline-flex items-center gap-2 bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-black px-3 py-2 rounded-lg text-xs font-bold hover:scale-[1.02] active:scale-[.98] transition">شروع</button>
+                      <button id="miniLater" class="focus-allowed px-3 py-2 rounded-lg text-xs bg-white/5 border border-white/10 hover:bg-white/10">بعداً</button>
+                    </div>
+                  </div>
+
+                  <div class="rounded-2xl p-3 bg-white/5 border border-white/10">
+                    <div class="text-[11px] text-white/60">Motivation</div>
+                    <div id="motivationMini" class="text-sm">تو می‌تونی؛ فقط یک قدم کوچک دیگه</div>
+                  </div>
+
+                  <div class="rounded-2xl p-3 bg-white/5 border border-white/10">
+                    <div class="text-[11px] text-white/60">System Health</div>
+                    <div class="mt-1 text-[12px] text-white/70">Audit • Security AI • Fast UI</div>
+                  </div>
+                </div>
+              </div>
+              <div class="glass"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Daily Learning -->
+    <section id="learn" class="section py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex items-end justify-between gap-6 mb-8">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-extrabold">🧠 مغز یادگیری – Neuro‑Microlearning</h2>
+            <p class="text-white/75 text-sm md:text-base mt-1 max-w-2xl">تطبیق زنده بر اساس ساعت زیستی، الگوی فراموشی، کیفیت پاسخ و تداوم حضور. حس: «این سیستم من را می‌شناسد».</p>
+          </div>
+          <div class="hidden md:flex items-center gap-3">
+            <div class="ring" id="brainRing" style="--val:32">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="text-center text-xs">
+                  <div class="text-white/60">Brain</div>
+                  <div id="brainVal" class="font-bold">32%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 space-y-4">
+            <div class="rounded-2xl p-4 md:p-6 bg-white/5 border border-white/10">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <div class="text-sm font-semibold">۱۰ کلمه امروز (Auto 00:00)</div>
+                  <div class="text-xs text-white/60">ترکیب هوشمند: Due + Weak + New</div>
+                </div>
+                <div class="text-xs text-white/60">مدل فراموشی: <span id="forgetModel">—</span></div>
+              </div>
+              <div class="mt-3 grid sm:grid-cols-4 gap-3">
+                <div class="rounded-xl p-3 bg-white/5 border border-white/10">
+                  <div class="text-[11px] text-white/60">Streak</div>
+                  <div id="streakVal" class="text-lg font-extrabold font-en" dir="ltr">—</div>
+                </div>
+                <div class="rounded-xl p-3 bg-white/5 border border-white/10">
+                  <div class="text-[11px] text-white/60">Known</div>
+                  <div id="knownVal" class="text-lg font-extrabold font-en" dir="ltr">—</div>
+                </div>
+                <div class="rounded-xl p-3 bg-white/5 border border-white/10">
+                  <div class="text-[11px] text-white/60">Due</div>
+                  <div id="dueVal" class="text-lg font-extrabold font-en" dir="ltr">—</div>
+                </div>
+                <div class="rounded-xl p-3 bg-white/5 border border-white/10">
+                  <div class="text-[11px] text-white/60">Mastery</div>
+                  <div id="masteryVal" class="text-lg font-extrabold font-en" dir="ltr">—</div>
+                </div>
+              </div>
+
+              <div id="wordList" class="mt-4 grid sm:grid-cols-2 gap-4"></div>
+            </div>
+
+            <div class="rounded-2xl p-4 md:p-6 bg-white/5 border border-white/10">
+              <div class="flex items-center justify-between mb-3">
+                <div class="text-sm font-semibold">Flashcards – Spring Motion</div>
+                <div class="text-xs text-white/60">راست: بلدم • چپ: تمرین</div>
+              </div>
+              <div class="relative h-[300px] sm:h-[340px]">
+                <div id="cards" class="absolute inset-0 flex items-center justify-center"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+              <div class="text-sm font-semibold mb-2">Real‑Time Brain Load</div>
+              <div class="flex items-center gap-3">
+                <div class="ring" id="liveRing" style="--val:45">
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-center text-xs">
+                      <div class="text-white/60">Load</div>
+                      <div id="liveVal" class="font-bold">45%</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-xs text-white/75 leading-relaxed">
+                  <div>ساعت طلایی: <span id="goldenTimeSide" class="text-[var(--primary)]">—</span></div>
+                  <div>پیشنهاد: <span id="todayTip" class="text-[var(--accent)]">—</span></div>
+                  <div>Stress: <span id="stress" class="text-white/85">—</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+              <div class="text-sm font-semibold mb-2">حافظه صوتی</div>
+              <div class="flex items-center gap-2 text-xs">
+                <button id="ttsBtn" class="focus-allowed px-3 py-2 rounded-lg bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-black font-bold">پخش تلفظ</button>
+                <button id="recBtn" class="focus-allowed px-3 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">تمرین صدا 🎙️</button>
+                <span id="recStatus" class="text-white/55">—</span>
+              </div>
+            </div>
+
+            <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+              <div class="text-sm font-semibold">S‑Mind™ Insight</div>
+              <div id="aiInsight" class="text-xs text-white/75 mt-1">—</div>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <button id="aiChallenge" class="focus-allowed px-3 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-xs">چالش بده</button>
+                <button id="aiEncourage" class="focus-allowed px-3 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-xs">انگیزه بده</button>
+                <button id="aiAdjust" class="focus-allowed px-3 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-xs">تطبیق سختی</button>
+              </div>
+            </div>
+
+            <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+              <div class="text-sm font-semibold">پیش‌بینی ۳۰ روز آینده</div>
+              <div class="mt-2 grid grid-cols-2 gap-3">
+                <div class="rounded-xl p-3 bg-white/5 border border-white/10">
+                  <div class="text-[11px] text-white/60">اگر ادامه بدهی…</div>
+                  <div id="pred30" class="mt-1 text-lg font-extrabold font-en" dir="ltr">—</div>
+                </div>
+                <div class="rounded-xl p-3 bg-white/5 border border-white/10">
+                  <div class="text-[11px] text-white/60">میانگین روزانه (۷ روز)</div>
+                  <div id="avg7" class="mt-1 text-lg font-extrabold font-en" dir="ltr">—</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+              <div class="text-sm font-semibold">Feedback Loop</div>
+              <div class="text-xs text-white/70 mt-1">به سیستم امتیاز بده تا دقیق‌تر شود. (به ایمیل مدیر هم می‌رسد.)</div>
+              <div class="mt-3 flex gap-2">
+                <button id="feedbackCta" class="focus-allowed px-3 py-2 rounded-lg bg-gradient-to-r from-[var(--sun)] via-[var(--accent)] to-[var(--primary)] text-black text-xs font-bold">ثبت نظر ⭐</button>
+                <span class="text-[12px] text-white/55 self-center">سریع • دقیق • ذخیره دائم</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S-Mind AI -->
+    <section id="future" class="section py-16 md:py-24 bg-white/5 border-y border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid lg:grid-cols-3 gap-6 items-start">
+          <div class="lg:col-span-2">
+            <h2 class="text-2xl md:text-3xl font-extrabold">🤖 S‑Mind™ AI – مغز نامرئیِ سیستم</h2>
+            <p class="text-white/75 text-sm md:text-base mt-1 max-w-2xl">در این نسخه، «AI» در همه لایه‌ها حضور دارد: تصمیم‌گیری، پیشنهاد، انگیزه و پایش امنیت. (در UI ساده؛ در باطن قدرتمند.)</p>
+
+            <div class="mt-6 grid md:grid-cols-3 gap-4">
+              <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+                <div class="text-sm font-semibold">AI Memory</div>
+                <div id="aiMemory" class="text-xs text-white/75 mt-1">—</div>
+              </div>
+              <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+                <div class="text-sm font-semibold">AI Motivation</div>
+                <div id="aiMotivation" class="text-xs text-white/75 mt-1">—</div>
+              </div>
+              <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+                <div class="text-sm font-semibold">Decision Engine</div>
+                <div id="aiDecision" class="text-xs text-white/75 mt-1">—</div>
+              </div>
+            </div>
+
+            <div class="mt-6 rounded-2xl p-4 bg-white/5 border border-white/10">
+              <div class="text-sm font-semibold mb-3">تعامل زنده</div>
+              <div id="aiChat" class="space-y-2 text-sm"></div>
+              <div class="mt-3 flex gap-2">
+                <input id="aiInput" class="focus-allowed w-full bg-transparent border border-white/15 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]/40" placeholder="سؤال خودت رو بنویس…" />
+                <button id="aiSend" class="focus-allowed px-4 py-2 rounded-xl bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-black text-sm font-bold">ارسال</button>
+              </div>
+              <div class="mt-2 text-[12px] text-white/55">این گفت‌وگو برای «یادگیری و راهنمایی» است؛ داده‌های حساس افشا نمی‌شود.</div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+              <div class="text-sm font-semibold">Voice Coach</div>
+              <div class="text-xs text-white/70">کلمه را تمرین کن. سیستم با Speech API بازخورد می‌دهد (اگر مرورگر پشتیبانی کند).</div>
+              <div class="mt-3 flex gap-2 text-xs">
+                <button id="voicePractice" class="focus-allowed px-3 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10">شروع تمرین 🎤</button>
+                <span id="voiceStatus" class="text-white/55">—</span>
+              </div>
+            </div>
+
+            <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+              <div class="text-sm font-semibold">Mirror of Growth</div>
+              <canvas id="progressChart" class="w-full h-[160px]"></canvas>
+              <div class="mt-2 flex items-center gap-2 text-xs text-white/70">
+                <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background: var(--primary)"></span> Vocabulary</span>
+                <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background: var(--accent)"></span> Consistency</span>
+              </div>
+            </div>
+
+            <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+              <div class="text-sm font-semibold">Badges</div>
+              <div id="badges" class="mt-2 flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vocabulary System -->
+    <section class="section py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-2xl md:text-3xl font-extrabold">🧩 بانک واژگان هوشمند</h2>
+        <p class="text-white/75 text-sm md:text-base mt-1 max-w-3xl">Semantic Network + Visual Anchors + Emotional Tagging. این موتور روزانه بر اساس پروفایل شما پلن می‌سازد.</p>
+
+        <div class="grid lg:grid-cols-2 gap-6 mt-6">
+          <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+            <div class="text-sm font-semibold mb-2">Semantic Network (Daily)</div>
+            <canvas id="network" class="w-full h-[320px]"></canvas>
+            <div class="text-xs text-white/60 mt-2">کلیک و درگ برای جابجایی گره‌ها</div>
+          </div>
+
+          <div class="rounded-2xl p-4 bg-white/5 border border-white/10">
+            <div class="text-sm font-semibold mb-2">Visual Memory Cards</div>
+            <div id="memoryCards" class="grid sm:grid-cols-2 gap-3"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Experience -->
+    <section class="section py-16 md:py-24">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+        <h2 class="text-2xl md:text-3xl font-extrabold">🌐 تجربه برند</h2>
+        <p class="text-white/75 text-sm md:text-base mt-2">«این فقط یادگیری نبود… این ارتقاء شخصی من بود». سادگی برای کاربر، قدرت برای سیستم، کنترل کامل برای مدیر.</p>
+      </div>
+    </section>
+
+    <footer class="section py-12 border-t border-white/10">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+        <div class="text-sm text-white/65">این فقط یک وبسایت نیست، این یک اکوسیستم هوشمند، آینده‌نگر و زنده است</div>
+        <div class="mt-2 text-white/85 font-semibold">Designed, Engineered & Visioned by سروش مسرور</div>
+        <div class="mt-4 flex items-center justify-center gap-2">
+          <button id="footerFeedback" class="focus-allowed px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs">ثبت نظر و امتیاز ⭐</button>
+          <span class="text-[12px] text-white/55">بازخورد شما مسیر نسخه Ultra را می‌سازد</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // =========================
+    // S English Ultra Supreme v3
+    // =========================
+
+    // ---------- Utilities ----------
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+    function toDayKey(date = new Date()){
+      const y = date.getFullYear();
+      const m = String(date.getMonth()+1).padStart(2,'0');
+      const d = String(date.getDate()).padStart(2,'0');
+      return `${y}-${m}-${d}`;
+    }
+    function nextMidnight(date = new Date()){
+      const n = new Date(date);
+      n.setHours(24,0,0,0);
+      return n;
+    }
+
+    function fmtTime(date=new Date()){
+      return new Intl.DateTimeFormat('fa-IR', { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false }).format(date);
+    }
+    function fmtDate(date=new Date()){
+      return new Intl.DateTimeFormat('fa-IR', { weekday:'long', year:'numeric', month:'long', day:'numeric' }).format(date);
+    }
+    function fmtDateShort(date=new Date()){
+      return new Intl.DateTimeFormat('fa-IR', { month:'2-digit', day:'2-digit' }).format(date);
+    }
+
+    function msToHMS(ms){
+      ms = Math.max(0, ms);
+      const s = Math.floor(ms/1000);
+      const h = Math.floor(s/3600);
+      const m = Math.floor((s%3600)/60);
+      const ss = s%60;
+      return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+    }
+
+    // Seeded PRNG
+    function xmur3(str) {
+      let h = 1779033703 ^ str.length;
+      for (let i = 0; i < str.length; i++) {
+        h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+        h = (h << 13) | (h >>> 19);
+      }
+      return function() {
+        h = Math.imul(h ^ (h >>> 16), 2246822507);
+        h = Math.imul(h ^ (h >>> 13), 3266489909);
+        return (h ^= h >>> 16) >>> 0;
+      };
+    }
+    function mulberry32(a) {
+      return function() {
+        let t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      }
+    }
+    function seededRand(seedStr){
+      const seed = xmur3(seedStr)();
+      return mulberry32(seed);
+    }
+
+    // Crypto helpers
+    async function sha256Hex(str){
+      const enc = new TextEncoder().encode(str);
+      const buf = await crypto.subtle.digest('SHA-256', enc);
+      return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+    function randomHex(bytes=16){
+      const a = new Uint8Array(bytes);
+      crypto.getRandomValues(a);
+      return Array.from(a).map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+
+    // Toasts
+    function toast(text, tone='info', ttl=2600){
+      const host = $('#toasts');
+      const el = document.createElement('div');
+      el.className = 'toast text-sm';
+      const icon = tone==='ok' ? '✅' : tone==='warn' ? '⚠️' : tone==='bad' ? '⛔' : 'ℹ️';
+      el.innerHTML = `<div class="flex items-start gap-3"><div class="mt-0.5">${icon}</div><div class="text-white/90 leading-relaxed">${text}</div></div>`;
+      host.appendChild(el);
+      setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateY(6px)'; el.style.transition='all .35s ease'; }, ttl);
+      setTimeout(()=>el.remove(), ttl+450);
+    }
+
+    // ---------- Micro Sound Engine ----------
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    let unlocked = false;
+
+    function ensureAudio(){
+      if (!audioCtx) audioCtx = new AudioCtx();
+      return audioCtx;
+    }
+    const unlockAudio = () => {
+      if (unlocked) return;
+      try {
+        const ctx = ensureAudio();
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.connect(g); g.connect(ctx.destination);
+        g.gain.value = 0;
+        o.start();
+        setTimeout(()=>{ o.stop(); }, 10);
+        unlocked = true;
+      } catch(e) {}
+    };
+
+    function blip(f=520, t=0.08, type='sine', vol=0.06){
+      try {
+        const ctx = ensureAudio();
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = type; o.frequency.value = f;
+        g.gain.value = vol;
+        o.connect(g); g.connect(ctx.destination);
+        o.start();
+        g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + t);
+        o.stop(ctx.currentTime + t);
+      } catch(e) {}
+    }
+    const successSound = () => { blip(760, .05, 'triangle', .08); setTimeout(()=>blip(980, .06, 'triangle', .06), 45); };
+    const warnSound = () => { blip(240, .12, 'sawtooth', .06); };
+    window.addEventListener('pointerdown', unlockAudio, { once: true });
+
+    // ---------- Theme & Focus Toggles ----------
+    const body = document.body;
+    const modeToggle = $('#modeToggle');
+    const modeIcon = $('#modeIcon');
+    const focusToggle = $('#focusToggle');
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) body.dataset.theme = savedTheme;
+    const updateIcon = () => { modeIcon.textContent = body.dataset.theme === 'light' ? '☀️' : '🌙'; };
+    updateIcon();
+    modeToggle.addEventListener('click', ()=>{
+      body.dataset.theme = body.dataset.theme === 'light' ? 'dark' : 'light';
+      localStorage.setItem('theme', body.dataset.theme);
+      updateIcon();
+      blip(820, .05);
+    });
+    focusToggle.addEventListener('click', ()=>{ body.dataset.focus = body.dataset.focus === 'on' ? 'off' : 'on'; blip(420, .06); });
+
+    // ---------- Hero Typing Animation ----------
+    const typeTarget = $('#typeTarget');
+    const heroText = '«هر روز، فقط ۱۰ کلمه\nآیندهات را تغییر میدهد»'.replace(/\u001F/g,'');
+    let ti = 0;
+    function typeLoop(){
+      if (ti <= heroText.length){
+        typeTarget.textContent = heroText.slice(0, ti++);
+        requestAnimationFrame(()=> setTimeout(typeLoop, 28));
+      }
+    }
+    setTimeout(typeLoop, 420);
+
+    // ---------- Particles background ----------
+    const particleCanvas = $('#particles');
+    const pctx = particleCanvas.getContext('2d');
+    const resizeParticles = () => {
+      particleCanvas.width = particleCanvas.clientWidth;
+      particleCanvas.height = particleCanvas.clientHeight;
+    };
+    new ResizeObserver(resizeParticles).observe(particleCanvas);
+    const particles = Array.from({length: 88}, ()=> ({
+      x: Math.random(), y: Math.random(), r: Math.random()*1.8+0.5,
+      a: Math.random()*Math.PI*2, s: Math.random()*0.34+0.08,
+      c: Math.random()
+    }));
+    function drawParticles(){
+      const w = particleCanvas.width, h = particleCanvas.height;
+      pctx.clearRect(0,0,w,h);
+      particles.forEach(p=>{
+        p.a += 0.002 + p.s*0.002;
+        p.x += Math.cos(p.a)*0.00035;
+        p.y += Math.sin(p.a)*0.00030;
+        if (p.x<0) p.x=1; if (p.x>1) p.x=0;
+        if (p.y<0) p.y=1; if (p.y>1) p.y=0;
+        const col = p.c < .33 ? 'rgba(0,234,255,.85)' : p.c < .66 ? 'rgba(255,55,214,.72)' : 'rgba(124,255,58,.55)';
+        pctx.fillStyle = col;
+        pctx.beginPath();
+        pctx.arc(p.x*w, p.y*h, p.r, 0, Math.PI*2);
+        pctx.fill();
+      });
+      requestAnimationFrame(drawParticles);
+    }
+    resizeParticles();
+    drawParticles();
+
+    // ---------- Word Bank ----------
+    const WORD_BANK = [
+      { w:'Sustain', m:'پایدار ساختن', emo:'🌱', ctx:'We must sustain our efforts.', fa:'باید تلاشهایمان را پایدار نگه داریم.', img:'🌿' },
+      { w:'Emerge', m:'پدیدار شدن', emo:'✨', ctx:'New ideas emerge over time.', fa:'ایدههای جدید با گذر زمان پدیدار میشوند.', img:'💡' },
+      { w:'Refine', m:'اصلاح کردن/صیقل دادن', emo:'🛠️', ctx:'Refine your pronunciation daily.', fa:'هر روز تلفظت را صیقل بده.', img:'🔊' },
+      { w:'Resilient', m:'تابآور', emo:'🧗‍♂️', ctx:'Be resilient in challenges.', fa:'در چالشها تابآور باش.', img:'🛡️' },
+      { w:'Align', m:'همراستا کردن', emo:'🧭', ctx:'Align goals with actions.', fa:'اهداف را با عمل هماهنگ کن.', img:'🎯' },
+      { w:'Amplify', m:'تقویت کردن', emo:'📣', ctx:'Amplify your learning.', fa:'یادگیریات را تقویت کن.', img:'📈' },
+      { w:'Clarity', m:'شفافیت', emo:'💎', ctx:'Seek clarity before speed.', fa:'پیش از سرعت، شفافیت را بجوی.', img:'🔍' },
+      { w:'Iterate', m:'تکرار و بهبود', emo:'♻️', ctx:'Iterate to master.', fa:'برای تسلط، تکرار کن.', img:'🏁' },
+      { w:'Anchor', m:'لنگر، تکیهگاه', emo:'⚓', ctx:'Use anchors to remember.', fa:'برای یادآوری از لنگر استفاده کن.', img:'🧠' },
+      { w:'Flow', m:'جریان، غرقگی', emo:'🌊', ctx:'Enter the flow state.', fa:'به حالت جریان وارد شو.', img:'🌀' },
+      { w:'Momentum', m:'شتاب/مومنتوم', emo:'🔥', ctx:'Build momentum with small wins.', fa:'با بردهای کوچک، شتاب بگیر.', img:'🏎️' },
+      { w:'Craft', m:'ساختن با ظرافت', emo:'🧵', ctx:'Craft a sentence for each word.', fa:'برای هر کلمه یک جمله بساز.', img:'🪡' },
+      { w:'Grasp', m:'درک کردن', emo:'🤝', ctx:'Grasp the core meaning.', fa:'معنای اصلی را درک کن.', img:'🧩' },
+      { w:'Elevate', m:'ارتقا دادن', emo:'🏔️', ctx:'Elevate your standards.', fa:'استانداردهایت را بالا ببر.', img:'⬆️' },
+      { w:'Convey', m:'منتقل کردن', emo:'📨', ctx:'Convey your idea clearly.', fa:'ایدهات را واضح منتقل کن.', img:'🗣️' },
+      { w:'Witness', m:'شاهد بودن', emo:'👁️', ctx:'Witness your progress daily.', fa:'هر روز شاهد رشد خودت باش.', img:'📅' },
+      { w:'Subtle', m:'ظریف', emo:'🫧', ctx:'Notice subtle differences.', fa:'تفاوتهای ظریف را ببین.', img:'🪶' },
+      { w:'Radiate', m:'تابیدن/منتشر کردن', emo:'🌟', ctx:'Radiate confidence.', fa:'اعتمادبهنفس را منتشر کن.', img:'☀️' },
+      { w:'Endure', m:'دوام آوردن', emo:'🗿', ctx:'Endure the hard days.', fa:'روزهای سخت را دوام بیاور.', img:'⏳' },
+      { w:'Pursue', m:'دنبال کردن', emo:'🏃', ctx:'Pursue your goals.', fa:'اهدافات را دنبال کن.', img:'🎯' },
+      { w:'Absorb', m:'جذب کردن', emo:'🧽', ctx:'Absorb words in context.', fa:'کلمات را در متن جذب کن.', img:'📚' },
+      { w:'Reveal', m:'آشکار کردن', emo:'🪞', ctx:'Mistakes reveal the path.', fa:'اشتباهها مسیر را آشکار میکنند.', img:'🧭' },
+      { w:'Gentle', m:'ملایم', emo:'🕊️', ctx:'Be gentle with yourself.', fa:'با خودت ملایم باش.', img:'🕊️' },
+      { w:'Harness', m:'مهار/بهکار گرفتن', emo:'🧲', ctx:'Harness your focus.', fa:'تمرکزت را مهار کن.', img:'🧲' },
+      { w:'Navigate', m:'مسیریابی', emo:'🧭', ctx:'Navigate uncertainty.', fa:'نامعلوم را هدایت کن.', img:'🗺️' },
+      { w:'Commit', m:'متعهد شدن', emo:'🤍', ctx:'Commit to 3 minutes daily.', fa:'به ۳ دقیقه روزانه متعهد شو.', img:'📌' },
+      { w:'Insight', m:'بینش', emo:'🔍', ctx:'An insight changes everything.', fa:'یک بینش همهچیز را تغییر میدهد.', img:'💡' },
+      { w:'Deliberate', m:'هدفمند', emo:'🎯', ctx:'Practice in a deliberate way.', fa:'هدفمند تمرین کن.', img:'🧠' },
+      { w:'Validate', m:'اعتبارسنجی کردن', emo:'🧾', ctx:'Validate your understanding.', fa:'درکات را اعتبارسنجی کن.', img:'🔎' },
+      { w:'Trajectory', m:'مسیر رشد', emo:'🛰️', ctx:'Your trajectory is upward.', fa:'مسیر رشدت رو به بالاست.', img:'🛰️' },
+      { w:'Calibrate', m:'تنظیم دقیق', emo:'🧪', ctx:'Calibrate difficulty daily.', fa:'هر روز سختی را دقیق تنظیم کن.', img:'🎚️' },
+      { w:'Reframe', m:'بازتعریف کردن', emo:'🪟', ctx:'Reframe failure as feedback.', fa:'شکست را بازخورد ببین.', img:'🔁' },
+      { w:'Illuminate', m:'روشن کردن', emo:'💡', ctx:'Examples illuminate meaning.', fa:'مثالها معنا را روشن میکنند.', img:'💡' },
+    ].map(x => ({...x, fa: String(x.fa).replace(/\u001F/g,'') }));
+
+    const BANK_BY_WORD = Object.fromEntries(WORD_BANK.map(x=>[x.w, x]));
+
+    // ---------- Invisible Security + Audit (Hidden) ----------
+    const Security = (() => {
+      const key = 'sEnglishSec_v3';
+      let sec = JSON.parse(localStorage.getItem(key) || '{}');
+      sec.events = sec.events || [];
+
+      function log(evt, meta={}, level='info'){
+        try {
+          sec.events.push({ t: Date.now(), evt, level, meta });
+          if (sec.events.length > 520) sec.events = sec.events.slice(-520);
+          localStorage.setItem(key, JSON.stringify(sec));
+        } catch(e) {}
+      }
+
+      const rl = new Map();
+      function rateLimit(name, limit=5, windowMs=60_000){
+        const now = Date.now();
+        const s = rl.get(name) || [];
+        const fresh = s.filter(t => now - t < windowMs);
+        fresh.push(now);
+        rl.set(name, fresh);
+        if (fresh.length > limit) {
+          log('rate_limit', { name, limit, windowMs }, 'warn');
+          return false;
+        }
+        return true;
+      }
+
+      function fingerprint(){
+        const nav = navigator;
+        const parts = [
+          nav.userAgent,
+          nav.language,
+          screen.width+'x'+screen.height,
+          Intl.DateTimeFormat().resolvedOptions().timeZone || 'tz',
+          String(navigator.hardwareConcurrency||0),
+        ].join('|');
+        return parts;
+      }
+
+      async function fpHash(){
+        return sha256Hex(fingerprint());
+      }
+
+      function sanitizeText(s, max=800){
+        s = String(s ?? '').replace(/[\u0000-\u001f\u007f]/g,' ').trim();
+        if (s.length > max) s = s.slice(0, max);
+        return s;
+      }
+
+      function timingSafeEq(a, b){
+        a = String(a||''); b = String(b||'');
+        if (a.length !== b.length) return false;
+        let r = 0;
+        for (let i=0;i<a.length;i++) r |= (a.charCodeAt(i) ^ b.charCodeAt(i));
+        return r === 0;
+      }
+
+      // Best-effort anomaly scoring
+      function riskScore(events){
+        let score = 0;
+        for (const e of events){
+          if (e.evt === 'rate_limit') score += 12;
+          if (e.evt === 'otp_fail') score += 10;
+          if (e.evt === 'otp_sent') score += 1;
+          if (e.evt === 'js_error') score += 4;
+          if (e.level === 'warn') score += 2;
+          if (e.level === 'bad') score += 6;
+        }
+        return clamp(score, 0, 100);
+      }
+
+      window.addEventListener('error', (ev)=>{
+        log('js_error', { msg: String(ev.message||''), src: String(ev.filename||''), ln: ev.lineno }, 'warn');
+      });
+      window.addEventListener('unhandledrejection', (ev)=>{
+        log('promise_reject', { msg: String(ev.reason?.message || ev.reason || '') }, 'warn');
+      });
+
+      return { log, rateLimit, fingerprint, fpHash, sanitizeText, timingSafeEq, riskScore, get:()=>sec };
+    })();
+
+    // ---------- DB (Ephemeral User Data + Persistent Admin Ledger) ----------
+    // قانون این نسخه: هر بار باز/رفرش → دیتای کاربر پاک می‌شود و باید دوباره ثبت‌نام/ورود کند.
+    // اما «Ledger مدیر» برای مشاهده آنلاین/آفلاین/خروج و تاریخچه ثبت‌نام‌ها باقی می‌ماند.
+
+    const EPHEMERAL_MODE = true;
+    const DB_KEY = 'sEnglishDB_ultra_v3_session'; // stored in sessionStorage
+    const LEDGER_KEY = 'sEnglishLedger_v1';       // stored in localStorage (admin visibility)
+
+    const ADMIN_EMAIL = 'sm9399353@gmail.com';
+    const ADMIN_SECRET_HASH_PROMISE = sha256Hex('1390|' + ADMIN_EMAIL);
+
+    const SESSION_ID = randomHex(8);
+
+    if (EPHEMERAL_MODE){
+      // هر بار باز/رفرش: همه داده‌های کاربر صفر می‌شود (حالت موقت کامل)
+      try { sessionStorage.clear(); } catch(e) {}
+      // امنیت نامرئی هم در حالت موقت ریست می‌شود تا هیچ داده کاربری باقی نماند
+      try { localStorage.removeItem('sEnglishSec_v3'); } catch(e) {}
+      // نکته: theme و تنظیمات ارسال ایمیل (EmailJS/SMTPJS) و Ledger مدیر پاک نمی‌شوند.
+    }
+
+    function loadDB(){
+      const raw = sessionStorage.getItem(DB_KEY);
+      if (!raw) return { v:3, users: {}, session: null, otp: {}, feedback: [], audit: [], emails: [], security: [] };
+      try {
+        const db = JSON.parse(raw);
+        db.v = db.v || 3;
+        db.users = db.users || {};
+        db.session = db.session || null;
+        db.otp = db.otp || {};
+        db.feedback = db.feedback || [];
+        db.audit = db.audit || [];
+        db.emails = db.emails || [];
+        db.security = db.security || [];
+        return db;
+      } catch(e){
+        return { v:3, users: {}, session: null, otp: {}, feedback: [], audit: [], emails: [], security: [] };
+      }
+    }
+    const DB = loadDB();
+
+    function saveDB(){
+      try { sessionStorage.setItem(DB_KEY, JSON.stringify(DB)); }
+      catch(e){ Security.log('db_save_fail', { msg: String(e?.message||e) }, 'bad'); }
+    }
+
+    // ---------- Admin Ledger (persistent) ----------
+    function ledgerLoad(){
+      try {
+        const raw = localStorage.getItem(LEDGER_KEY);
+        if (!raw) return { v:1, users: {} };
+        const obj = JSON.parse(raw);
+        obj.v = obj.v || 1;
+        obj.users = obj.users || {};
+        return obj;
+      } catch(e){
+        return { v:1, users: {} };
+      }
+    }
+    function ledgerSave(L){
+      try { localStorage.setItem(LEDGER_KEY, JSON.stringify(L)); } catch(e) {}
+    }
+    function ledgerUpsert(email, patchFn){
+      const e = normalizeEmail(email);
+      const L = ledgerLoad();
+      const cur = L.users[e] || {
+        email: e,
+        name: '',
+        role: 'user',
+        accountStatus: 'active',
+        registeredAt: null,
+        lastLoginAt: null,
+        lastSeenAt: null,
+        lastLogoutAt: null,
+        sessions: 0,
+        lastSessionId: null,
+      };
+      const next = patchFn({ ...cur }) || cur;
+      L.users[e] = next;
+      ledgerSave(L);
+      return next;
+    }
+    function ledgerGet(email){
+      const e = normalizeEmail(email);
+      const L = ledgerLoad();
+      return L.users[e] || null;
+    }
+    function ledgerMarkOnline(email, extra={}){
+      return ledgerUpsert(email, (u)=>{
+        u.name = u.name || (extra.name || '');
+        u.role = extra.role || u.role || 'user';
+        u.registeredAt = u.registeredAt || Date.now();
+        u.lastLoginAt = extra.loginAt || u.lastLoginAt || Date.now();
+        u.lastSeenAt = Date.now();
+        u.lastSessionId = SESSION_ID;
+        u.sessions = (u.sessions || 0) + (extra.bumpSession ? 1 : 0);
+        return u;
+      });
+    }
+    function ledgerTouch(email){
+      return ledgerUpsert(email, (u)=>{ u.lastSeenAt = Date.now(); u.lastSessionId = SESSION_ID; return u; });
+    }
+    function ledgerMarkLogout(email){
+      return ledgerUpsert(email, (u)=>{
+        u.lastLogoutAt = Date.now();
+        u.lastSeenAt = Date.now();
+        u.lastSessionId = SESSION_ID;
+        return u;
+      });
+    }
+    function ledgerMarkLeft(email){
+      // خروج بدون کلیک روی logout (best-effort)
+      return ledgerUpsert(email, (u)=>{
+        u.lastSeenAt = u.lastSeenAt || Date.now();
+        u.leftAt = Date.now();
+        u.lastSessionId = SESSION_ID;
+        return u;
+      });
+    }
+    function ledgerSetAccountStatus(email, status){
+      return ledgerUpsert(email, (u)=>{ u.accountStatus = status; return u; });
+    }
+    function presenceLabel(u){
+      const now = Date.now();
+      const lastSeen = u.lastSeenAt || 0;
+      const lastLogout = u.lastLogoutAt || 0;
+      const leftAt = u.leftAt || 0;
+
+      // Online if heartbeat within 45s and no newer logout
+      const online = lastSeen && (now - lastSeen < 45_000) && lastLogout < lastSeen;
+      if (online) return { key:'online', text:'ONLINE', hint:'فعال' };
+
+      // Explicit logout has the highest priority
+      if (lastLogout && lastLogout >= Math.max(lastSeen, leftAt)) return { key:'logout', text:'LOGGED OUT', hint:'خارج شده' };
+
+      // Left (tab closed / hidden) without logout
+      if (leftAt && leftAt >= lastSeen) return { key:'offline', text:'OFFLINE', hint:'تب بسته شد' };
+
+      // Seen before, but currently inactive
+      if (lastSeen) return { key:'offline', text:'OFFLINE', hint:'آفلاین' };
+      return { key:'unknown', text:'—', hint:'—' };
+    }
+
+    function normalizeEmail(email){ return String(email||'').trim().toLowerCase(); }
+    function currentEmail(){ return DB.session?.email || null; }
+    function currentUser(){ const e = currentEmail(); return e ? DB.users[e] || null : null; }
+
+    function audit(type, meta={}){
+      try {
+        DB.audit.push({ t: Date.now(), type, email: currentEmail(), meta });
+        if (DB.audit.length > 4000) DB.audit = DB.audit.slice(-4000);
+        saveDB();
+      } catch(e) {}
+    }
+
+    function emailLog(kind, to, ok, via, subject=''){
+      DB.emails.push({ t: Date.now(), kind, to, ok: !!ok, via: String(via||'none'), subject });
+      if (DB.emails.length > 1200) DB.emails = DB.emails.slice(-1200);
+      saveDB();
+    }
+
+    function securityLog(level, evt, meta={}){
+      DB.security.push({ t: Date.now(), level, evt, email: currentEmail(), meta });
+      if (DB.security.length > 1800) DB.security = DB.security.slice(-1800);
+      saveDB();
+      Security.log(evt, meta, level);
+
+      // Mirror important security events to admin ledger (invisible)
+      try {
+        const em = currentEmail() || meta?.email;
+        if (em && typeof em === 'string'){
+          ledgerUpsert(em, (u)=>{
+            u.lastSeenAt = Date.now();
+            u.lastSessionId = SESSION_ID;
+            u.sec = u.sec || { score:0, lastEvt:null, lastAt:null, events:0 };
+            u.sec.lastEvt = evt;
+            u.sec.lastAt = Date.now();
+            u.sec.events = (u.sec.events||0) + 1;
+            // simple score bump
+            const bump = level==='bad' ? 12 : level==='warn' ? 6 : 1;
+            u.sec.score = clamp((u.sec.score||0) + bump, 0, 100);
+            return u;
+          });
+        }
+      } catch(e) {}
+    }
+
+    function ensureUser(email, profileInit={}){
+      const e = normalizeEmail(email);
+      if (!DB.users[e]){
+        DB.users[e] = {
+          email: e,
+          role: 'user',
+          status: 'active', // active|suspended
+          createdAt: Date.now(),
+          verifiedAt: null,
+          profile: {
+            name: profileInit.name || '',
+            source: profileInit.source || '',
+            sourceOther: profileInit.sourceOther || '',
+            locale: 'fa-IR'
+          },
+          identity: {
+            tz: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+            deviceHash: '',
+            firstIpHash: '',
+            ua: navigator.userAgent
+          },
+          logins: [],
+          progress: {
+            totalKnown: 0,
+            totalPractice: 0,
+            activeDays: {},
+            streak: 0,
+            lastActiveDay: null,
+            lastSeenAt: null,
+            lastScrollY: 0,
+            history: []
+          },
+          cards: {},
+          daily: { dayKey: null, words: [] },
+          feedback: [],
+          messages: []
+        };
+      }
+      return DB.users[e];
+    }
+
+    // ---------- Delivery Providers ----------
+    const MAILCFG_KEY = 'sEnglishMailCfg_v3';
+    const MAIL = {
+      toHidden: ADMIN_EMAIL,
+      emailjs: { enabled: false, publicKey: '', serviceId: '', templateId: '' },
+      smtpjs: { enabled: false, secureToken: '' }
+    };
+    function loadMailCfg(){
+      try {
+        const raw = localStorage.getItem(MAILCFG_KEY);
+        if (!raw) return;
+        const cfg = JSON.parse(raw);
+        if (cfg?.emailjs) Object.assign(MAIL.emailjs, cfg.emailjs);
+        if (cfg?.smtpjs) Object.assign(MAIL.smtpjs, cfg.smtpjs);
+      } catch(e) {}
+    }
+    function saveMailCfg(){
+      try {
+        localStorage.setItem(MAILCFG_KEY, JSON.stringify({ emailjs: MAIL.emailjs, smtpjs: MAIL.smtpjs }));
+        return true;
+      } catch(e){
+        return false;
+      }
+    }
+    loadMailCfg();
+
+    async function sendEmail(payload){
+      // payload: { to, subject, text, replyTo }
+      try {
+        // EmailJS
+        if (MAIL.emailjs.enabled && MAIL.emailjs.publicKey && MAIL.emailjs.serviceId && MAIL.emailjs.templateId){
+          if (!window.emailjs){
+            await new Promise((res, rej)=>{
+              const s = document.createElement('script');
+              s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+              s.onload = res; s.onerror = rej;
+              document.head.appendChild(s);
+            });
+          }
+          window.emailjs.init({ publicKey: MAIL.emailjs.publicKey });
+          await window.emailjs.send(MAIL.emailjs.serviceId, MAIL.emailjs.templateId, {
+            to_email: payload.to,
+            subject: payload.subject,
+            message: payload.text,
+            reply_to: payload.replyTo || ''
+          });
+          return { ok:true, via:'emailjs' };
+        }
+
+        // SMTPJS
+        if (MAIL.smtpjs.enabled && MAIL.smtpjs.secureToken){
+          if (!window.Email){
+            await new Promise((res, rej)=>{
+              const s = document.createElement('script');
+              s.src = 'https://smtpjs.com/v3/smtp.js';
+              s.onload = res; s.onerror = rej;
+              document.head.appendChild(s);
+            });
+          }
+          await window.Email.send({
+            SecureToken: MAIL.smtpjs.secureToken,
+            To: payload.to,
+            From: payload.replyTo || payload.to,
+            Subject: payload.subject,
+            Body: payload.text.replace(/\n/g,'<br>')
+          });
+          return { ok:true, via:'smtpjs' };
+        }
+
+        return { ok:false, via:'none' };
+      } catch(e){
+        securityLog('warn', 'send_email_fail', { msg: String(e?.message||e) });
+        return { ok:false, via:'error' };
+      }
+    }
+
+    function openMailto(to, subject, text){
+      const u = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+      window.location.href = u;
+    }
+
+    // ---------- Auth (OTP + Admin detection) ----------
+    let otpResendUntil = 0;
+    let otpTimer = null;
+
+    async function otpHash(code, email, salt){
+      return sha256Hex(`${String(code).trim()}|${normalizeEmail(email)}|${salt}`);
+    }
+
+    function otpCooldownUI(){
+      const btn = $('#sendCode');
+      const hint = $('#otpHint');
+      const now = Date.now();
+      const left = Math.max(0, otpResendUntil - now);
+      if (left > 0){
+        btn.disabled = true;
+        btn.classList.add('opacity-60');
+        hint.textContent = `ارسال مجدد تا ${Math.ceil(left/1000)} ثانیه`;
+      } else {
+        btn.disabled = false;
+        btn.classList.remove('opacity-60');
+        hint.textContent = 'کد ۶ رقمی • اعتبار ۹۰ ثانیه';
+      }
+    }
+
+    async function sendOTP(email){
+      const e = normalizeEmail(email);
+      if (!e || !e.includes('@')) throw new Error('ایمیل معتبر نیست');
+      if ($('#hpWebsite')?.value) throw new Error('درخواست مشکوک (bot).');
+      if (!Security.rateLimit('otp:'+e, 3, 60_000)) throw new Error('تعداد تلاش زیاد است. ۶۰ ثانیه صبر کن.');
+
+      const code = String(Math.floor(100000 + Math.random()*900000));
+      const exp = Date.now() + 90*1000; // 90 sec
+      const salt = randomHex(12);
+      const hash = await otpHash(code, e, salt);
+
+      DB.otp[e] = {
+        hash, salt, exp, tries: 0,
+        lastSentAt: Date.now(),
+        demoCode: code,
+        delivery: { ok:false, via:'none', at: Date.now() }
+      };
+      saveDB();
+
+      // ثبت اولیه در Ledger مدیر: حتی اگر کاربر فقط OTP بزند و خارج شود
+      ledgerUpsert(e, (u)=>{
+        u.email = e;
+        u.startedAt = u.startedAt || Date.now();
+        u.registeredAt = u.registeredAt || null; // ثبت‌نام واقعی بعد از verify
+        u.lastSeenAt = Date.now();
+        u.lastSessionId = SESSION_ID;
+        u.role = u.role || 'user';
+        u.accountStatus = u.accountStatus || 'active';
+        return u;
+      });
+
+      const subject = 'S English – کد ورود یکبارمصرف';
+      const text = `کد ورود شما: ${code}\nاعتبار: ۹۰ ثانیه\n\nS English – Crafted with Vision by سروش مسرور`;
+
+      const res = await sendEmail({ to: e, subject, text, replyTo: '' });
+      DB.otp[e].delivery = { ok: !!res.ok, via: res.via, at: Date.now() };
+      emailLog('otp', e, res.ok, res.via, subject);
+      audit('otp_sent', { to: e, ok: !!res.ok, via: res.via });
+
+      let statusLine = '';
+      if (res.ok){
+        statusLine = `ارسال شد ✅ (via: ${res.via})`;
+        toast('کد به ایمیل ارسال شد.', 'ok', 3200);
+      } else {
+        // Clipboard fallback (demo)
+        try {
+          await navigator.clipboard.writeText(code);
+          statusLine = 'سرویس ایمیل فعال نیست؛ کد در کلیپ‌بورد + صندوق داخلی ثبت شد.';
+          toast('کد ساخته شد و در کلیپ‌بورد کپی شد (همچنین صندوق داخلی).', 'warn', 3600);
+        } catch(e2){
+          statusLine = 'سرویس ایمیل فعال نیست؛ کد در صندوق داخلی ثبت شد (کپی ممکن نبود).';
+          toast('کد ساخته شد و در صندوق داخلی ثبت شد. (کپی ممکن نبود)', 'warn', 3600);
+        }
+      }
+      $('#otpDeliveryStatus').textContent = statusLine;
+
+      otpResendUntil = Date.now() + 30_000;
+      if (otpTimer) clearInterval(otpTimer);
+      otpTimer = setInterval(otpCooldownUI, 250);
+      otpCooldownUI();
+
+      return true;
+    }
+
+    async function verifyOTP(email, code, profileInit){
+      const e = normalizeEmail(email);
+      const o = DB.otp[e];
+      if (!o) throw new Error('اول کد را ارسال کن.');
+      if (Date.now() > o.exp) throw new Error('کد منقضی شده است. دوباره ارسال کن.');
+      if (o.tries >= 6) throw new Error('تلاش‌های ناموفق زیاد شد. دوباره ارسال کن.');
+
+      o.tries++;
+      const h = await otpHash(code, e, o.salt);
+      if (!Security.timingSafeEq(h, o.hash)){
+        saveDB();
+        securityLog('warn', 'otp_fail', { email: e });
+        audit('otp_fail', { email: e });
+        throw new Error('کد اشتباه است.');
+      }
+
+      const user = ensureUser(e, profileInit);
+      if (user.status === 'suspended'){
+        securityLog('bad', 'login_suspended', { email: e });
+        throw new Error('این حساب مسدود شده است.');
+      }
+
+      // Admin detection (hidden logic)
+      const secret = String(profileInit?.secret || '').trim();
+      if (e === ADMIN_EMAIL && secret){
+        const adminHash = await ADMIN_SECRET_HASH_PROMISE;
+        const provided = await sha256Hex(secret + '|' + e);
+        if (Security.timingSafeEq(provided, adminHash)){
+          user.role = 'admin';
+        }
+      }
+
+      user.verifiedAt = user.verifiedAt || Date.now();
+      user.profile.name = user.profile.name || profileInit?.name || '';
+      user.profile.source = user.profile.source || profileInit?.source || '';
+      user.profile.sourceOther = user.profile.sourceOther || profileInit?.sourceOther || '';
+      user.identity.tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      user.identity.ua = navigator.userAgent;
+      user.identity.deviceHash = await Security.fpHash();
+
+      user.logins.push({ t: Date.now(), tz: user.identity.tz, deviceHash: user.identity.deviceHash });
+      if (user.logins.length > 1200) user.logins = user.logins.slice(-1200);
+
+      DB.session = { email: e, issuedAt: Date.now(), deviceHash: user.identity.deviceHash };
+      delete DB.otp[e];
+      saveDB();
+
+      // Persistent admin visibility (Ledger)
+      ledgerMarkOnline(e, { name: user.profile?.name || '', role: user.role, loginAt: Date.now(), bumpSession: true });
+      ledgerUpsert(e, (u)=>{
+        u.name = u.name || (user.profile?.name || '');
+        u.source = u.source || (user.profile?.source || '');
+        u.sourceOther = u.sourceOther || (user.profile?.sourceOther || '');
+        u.registeredAt = u.registeredAt || Date.now(); // ثبت‌نام/ورود تایید شده
+        u.lastLoginAt = Date.now();
+        u.lastSeenAt = Date.now();
+        u.lastSessionId = SESSION_ID;
+        return u;
+      });
+
+      audit('auth_ok', { email: e, role: user.role });
+      securityLog('info', 'auth_ok', { email: e, role: user.role });
+      return true;
+    }
+
+    function logout(){
+      const e = DB.session?.email || null;
+      audit('logout', { email: e });
+      if (e) ledgerMarkLogout(e);
+      DB.session = null;
+      saveDB();
+      applyAuthState();
+      toast('خروج انجام شد.', 'info');
+    }
+
+    // ---------- Learning Engine (SM-2) ----------
+    function sm2Update(state, quality){
+      const s = Object.assign({ repetition:0, interval:0, ease:2.5, due:0, correct:0, wrong:0, lastSeen:0 }, state||{});
+      let { repetition, interval, ease } = s;
+
+      if (quality < 3){
+        repetition = 0;
+        interval = 1;
+        s.wrong += 1;
+      } else {
+        repetition += 1;
+        s.correct += 1;
+        if (repetition === 1) interval = 1;
+        else if (repetition === 2) interval = 6;
+        else interval = Math.round(interval * ease);
+      }
+
+      ease = Math.max(1.3, ease + (0.1 - (5-quality)*(0.08 + (5-quality)*0.02)));
+      const due = Date.now() + interval * 24 * 3600 * 1000;
+
+      return { repetition, interval, ease, due, correct: s.correct, wrong: s.wrong, lastSeen: Date.now() };
+    }
+
+    function dueCount(user){
+      const now = Date.now();
+      return Object.values(user.cards || {}).filter(c => c && c.due && c.due <= now).length;
+    }
+
+    function strengthOfCard(st){
+      if (!st) return 0;
+      const denom = (st.correct + st.wrong + 2);
+      return clamp(Math.round((st.correct / denom) * 100), 0, 100);
+    }
+
+    function masteryScore(user){
+      const vals = Object.values(user.cards || {}).map(strengthOfCard);
+      if (!vals.length) return 0;
+      const avg = vals.reduce((a,b)=>a+b,0)/vals.length;
+      return Math.round(avg);
+    }
+
+    function markActiveDay(user, dayKey){
+      user.progress.activeDays = user.progress.activeDays || {};
+      if (!user.progress.activeDays[dayKey]) user.progress.activeDays[dayKey] = { known:0, practice:0, actions:0, seconds:0 };
+      user.progress.lastActiveDay = dayKey;
+
+      let streak = 0;
+      let cursor = new Date();
+      cursor.setHours(0,0,0,0);
+      for (let i=0; i<4000; i++){
+        const k = toDayKey(cursor);
+        if (user.progress.activeDays[k]) streak++;
+        else break;
+        cursor.setDate(cursor.getDate()-1);
+      }
+      user.progress.streak = streak;
+    }
+
+    function addEvent(user, evt){
+      user.progress.history = user.progress.history || [];
+      user.progress.history.push(Object.assign({ t: Date.now() }, evt));
+      if (user.progress.history.length > 5000) user.progress.history = user.progress.history.slice(-5000);
+      user.progress.lastSeenAt = Date.now();
+    }
+
+    function ensureDailyPlan(user, dayKey){
+      user.daily = user.daily || { dayKey:null, words: [] };
+      if (user.daily.dayKey === dayKey && Array.isArray(user.daily.words) && user.daily.words.length === 10) return user.daily.words;
+
+      const now = Date.now();
+      // Due words first (up to 5) sorted by earliest due + weakest
+      const dueWords = Object.entries(user.cards || {})
+        .filter(([w,st]) => st && st.due && st.due <= now && BANK_BY_WORD[w])
+        .sort((a,b)=>{
+          const sa = strengthOfCard(a[1]);
+          const sb = strengthOfCard(b[1]);
+          return (a[1].due - b[1].due) || (sa - sb);
+        })
+        .map(([w]) => w);
+
+      const picked = [];
+      for (const w of dueWords){
+        if (picked.length >= 5) break;
+        picked.push(w);
+      }
+
+      // Fill with new words
+      const rng = seededRand(`${user.email}|${dayKey}`);
+      const pool = WORD_BANK.map(x=>x.w).filter(w => !user.cards[w]);
+      for (let i=pool.length-1; i>0; i--){
+        const j = Math.floor(rng() * (i+1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      for (const w of pool){
+        if (picked.length >= 10) break;
+        picked.push(w);
+      }
+      while (picked.length < 10){
+        const w = WORD_BANK[Math.floor(rng()*WORD_BANK.length)].w;
+        if (!picked.includes(w)) picked.push(w);
+      }
+
+      user.daily = { dayKey, words: picked.slice(0,10) };
+      addEvent(user, { type:'new_daily', dayKey });
+      audit('daily_plan', { dayKey });
+      saveDB();
+      return user.daily.words;
+    }
+
+    function applyAnswer(word, known){
+      const user = currentUser();
+      if (!user) return requireAuth();
+      const dayKey = toDayKey();
+      markActiveDay(user, dayKey);
+
+      user.cards[word] = user.cards[word] || { repetition:0, interval:0, ease:2.5, due:0, correct:0, wrong:0, lastSeen:0 };
+      const quality = known ? 5 : 2;
+      user.cards[word] = sm2Update(user.cards[word], quality);
+
+      user.progress.activeDays[dayKey].actions++;
+      if (known){
+        user.progress.totalKnown++;
+        user.progress.activeDays[dayKey].known++;
+      } else {
+        user.progress.totalPractice++;
+        user.progress.activeDays[dayKey].practice++;
+      }
+
+      addEvent(user, { type:'answer', word, known, dayKey });
+      audit('answer', { word, known, dayKey });
+      saveDB();
+      updateAllUI();
+    }
+
+    // ---------- TTS & Speech Recognition ----------
+    function speak(text, opts={lang:'en-US'}){
+      if (!text) return;
+      if (!('speechSynthesis' in window)) return toast('Speech Synthesis در این مرورگر موجود نیست.', 'warn');
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = opts.lang || 'en-US';
+      u.pitch = 1.05;
+      u.rate = 0.95;
+      u.volume = 1;
+      speechSynthesis.cancel();
+      speechSynthesis.speak(u);
+    }
+
+    const recBtn = $('#recBtn');
+    const recStatus = $('#recStatus');
+    let recognition = null;
+    let recognizing = false;
+    if ('webkitSpeechRecognition' in window){
+      recognition = new webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.onstart = ()=>{ recognizing=true; recStatus.textContent='در حال گوش دادن…'; audit('voice_start'); };
+      recognition.onend = ()=>{ recognizing=false; recStatus.textContent='تمام'; audit('voice_end'); };
+      recognition.onerror = ()=>{ recognizing=false; recStatus.textContent='خطا'; warnSound(); securityLog('warn','voice_err'); };
+      recognition.onresult = (ev)=>{
+        const text = ev.results[0][0].transcript;
+        recStatus.textContent = 'شنید: ' + text;
+        successSound();
+        audit('voice_result', { text });
+      };
+      recBtn.addEventListener('click', ()=>{
+        if (!currentUser()) return requireAuth();
+        recognizing ? recognition.stop() : recognition.start();
+        blip(470,.05);
+      });
+    } else {
+      recBtn.addEventListener('click', ()=>{ recStatus.textContent='مرورگر از Speech Recognition پشتیبانی نمی‌کند'; warnSound(); });
+    }
+
+    // ---------- Brain Load Simulation ----------
+    function circadianLoad(date=new Date()){
+      const h = date.getHours() + date.getMinutes()/60;
+      const peak1 = Math.exp(-Math.pow((h-10)/2.2,2));
+      const peak2 = Math.exp(-Math.pow((h-19)/2.5,2));
+      const base = 0.22 + 0.7*Math.max(peak1, peak2);
+      return Math.round(base*100);
+    }
+    function forgettingCurve(days){
+      return Math.round(100 * Math.exp(-0.45 * days));
+    }
+    function setRing(el, val, txtEl){
+      if (!el) return;
+      el.style.setProperty('--val', val);
+      if (txtEl) txtEl.textContent = val + '%';
+    }
+
+    // ---------- Auth Controls ----------
+    const authModal = $('#authModal');
+    const lockOverlay = $('#lockOverlay');
+    const authBtn = $('#authBtn');
+    const logoutBtn = $('#logoutBtn');
+    const heroAuthText = $('#heroAuthText');
+    const adminBtn = $('#adminBtn');
+
+    function openAuth(){
+      authModal.dataset.open = 'true';
+      authModal.setAttribute('aria-hidden', 'false');
+      $('#authEmail').focus();
+      blip(560,.05);
+    }
+    function closeAuth(){
+      authModal.dataset.open = 'false';
+      authModal.setAttribute('aria-hidden', 'true');
+    }
+
+    $('#authClose').addEventListener('click', closeAuth);
+    $('#openAuth').addEventListener('click', openAuth);
+
+    authBtn?.addEventListener('click', ()=>{
+      if (currentUser()) toast('شما وارد هستید. برای خروج، دکمه خروج را بزن.', 'info');
+      else openAuth();
+    });
+    logoutBtn?.addEventListener('click', logout);
+
+    // source other
+    $('#authSource').addEventListener('change', ()=>{
+      const v = $('#authSource').value;
+      $('#authSourceOtherWrap').classList.toggle('hidden', v !== 'other');
+    });
+
+    // OTP Flow
+    const otpArea = $('#otpArea');
+    $('#sendCode').addEventListener('click', async ()=>{
+      const email = $('#authEmail').value;
+      try {
+        await sendOTP(email);
+        otpArea.classList.remove('hidden');
+        $('#authCode').focus();
+        successSound();
+      } catch(e){
+        toast(e.message || 'خطا در ارسال کد', 'bad');
+        warnSound();
+      }
+    });
+
+    $('#verifyCode').addEventListener('click', async ()=>{
+      const email = $('#authEmail').value;
+      const code = $('#authCode').value;
+      const name = Security.sanitizeText($('#authName').value, 60);
+      const source = Security.sanitizeText($('#authSource').value, 30);
+      const sourceOther = Security.sanitizeText($('#authSourceOther').value, 60);
+      const secret = String($('#authSecret').value || '');
+
+      try {
+        await verifyOTP(email, code, { name, source, sourceOther, secret });
+        closeAuth();
+        lockOverlay.style.display = 'none';
+        toast('ورود موفق. ذخیره‌سازی از این لحظه فعال است.', 'ok', 3200);
+        successSound();
+        applyAuthState();
+        updateAllUI(true);
+      } catch(e){
+        toast(e.message || 'کد اشتباه است', 'bad');
+        warnSound();
+      }
+    });
+
+    $('#demoInbox').addEventListener('click', ()=>{
+      const email = normalizeEmail($('#authEmail').value);
+      const o = DB.otp[email];
+      if (!o) return toast('هنوز کدی ساخته نشده.', 'info');
+      toast(`صندوق داخلی: کد برای ${email} = ${o.demoCode} (دمو)`, 'info', 7000);
+      blip(720,.05);
+    });
+
+    $('#otpReveal').addEventListener('click', ()=>{
+      const email = normalizeEmail($('#authEmail').value);
+      const o = DB.otp[email];
+      if (!o) return toast('کدی موجود نیست.', 'info');
+      $('#otpRevealText').textContent = o.demoCode;
+      successSound();
+    });
+
+    // Require auth gate
+    function requireAuth(){
+      openAuth();
+      warnSound();
+      return false;
+    }
+
+    function isAdmin(){
+      const u = currentUser();
+      return !!u && u.role === 'admin' && u.email === ADMIN_EMAIL;
+    }
+
+    function applyAuthState(){
+      const user = currentUser();
+      if (user){
+        body.dataset.auth = 'on';
+        $('#authStateDot').className = 'w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,.9)]';
+        $('#authStateText').textContent = user.email;
+        logoutBtn?.classList.remove('hidden');
+        heroAuthText.textContent = `وارد شدی — ${user.profile?.name ? user.profile.name + ' • ' : ''}ذخیره‌سازی فعال`;
+        $('#dailyMode').textContent = 'Active';
+        $('#systemMsg').textContent = EPHEMERAL_MODE
+          ? 'نسخه موقت: با رفرش/باز کردن دوباره، همه چیز پاک می‌شود و باید دوباره ثبت‌نام/ورود کنی. (مدیر فقط حضور/خروج را می‌بیند)'
+          : 'سیستم فعال است.';
+
+        if (isAdmin()) adminBtn.classList.remove('hidden');
+        else adminBtn.classList.add('hidden');
+
+        if (user.progress.lastScrollY && Math.abs(window.scrollY - user.progress.lastScrollY) > 60){
+          setTimeout(()=> window.scrollTo({ top: user.progress.lastScrollY, behavior:'smooth' }), 60);
+        }
+      } else {
+        body.dataset.auth = 'off';
+        $('#authStateDot').className = 'w-2.5 h-2.5 rounded-full bg-white/30';
+        $('#authStateText').textContent = 'ورود';
+        logoutBtn?.classList.add('hidden');
+        heroAuthText.textContent = 'برای استفاده باید وارد شوی';
+        $('#dailyMode').textContent = 'Locked';
+        $('#systemMsg').textContent = EPHEMERAL_MODE
+          ? 'برای شروع ثبت‌نام/ورود کن. (این نسخه موقت است و با رفرش/بازگشت دوباره، اطلاعات پاک می‌شود)'
+          : 'برای شروع ثبت‌نام/ورود کن.';
+        adminBtn.classList.add('hidden');
+      }
+    }
+
+    // ---------- Feedback System (Stars + send to hidden email) ----------
+    const feedbackModal = $('#feedbackModal');
+    const feedbackBtn = $('#feedbackBtn');
+    const feedbackCta = $('#feedbackCta');
+    const footerFeedback = $('#footerFeedback');
+    let feedbackRating = 0;
+
+    function openFeedback(){
+      if (!currentUser()) return requireAuth();
+      feedbackModal.dataset.open = 'true';
+      feedbackModal.setAttribute('aria-hidden', 'false');
+      $('#feedbackText').focus();
+      blip(760,.05);
+    }
+    function closeFeedback(){
+      feedbackModal.dataset.open = 'false';
+      feedbackModal.setAttribute('aria-hidden', 'true');
+    }
+
+    function setStars(n){
+      feedbackRating = n;
+      $$('.star').forEach(s=>{
+        const v = Number(s.dataset.star);
+        s.dataset.on = v <= n ? 'true' : 'false';
+      });
+      $('#feedbackScore').textContent = n ? `${n}/5` : '—';
+    }
+    setStars(0);
+
+    feedbackBtn.addEventListener('click', openFeedback);
+    feedbackCta.addEventListener('click', openFeedback);
+    footerFeedback.addEventListener('click', openFeedback);
+
+    $('#feedbackClose').addEventListener('click', closeFeedback);
+    $('#feedbackNeedAuth').addEventListener('click', ()=>{ closeFeedback(); openAuth(); });
+
+    $$('.star').forEach(btn=>{
+      btn.addEventListener('click', ()=>{ setStars(Number(btn.dataset.star)); successSound(); });
+      btn.addEventListener('mouseenter', ()=>{
+        const v = Number(btn.dataset.star);
+        $$('.star').forEach(s=>{
+          const x = Number(s.dataset.star);
+          s.dataset.on = x <= v ? 'true' : 'false';
+        });
+      });
+      btn.addEventListener('mouseleave', ()=> setStars(feedbackRating));
+    });
+
+    function sentiment(text){
+      const t = text.toLowerCase();
+      const pos = ['عالی','بهترین','عاشق','دوست','بینظیر','perfect','great','amazing','love'];
+      const neg = ['بد','افتضاح','ضعیف','نمیشه','کند','bug','problem','hate','awful'];
+      let s = 0;
+      for (const p of pos) if (t.includes(p)) s += 1;
+      for (const n of neg) if (t.includes(n)) s -= 1;
+      return s > 0 ? 'positive' : s < 0 ? 'negative' : 'neutral';
+    }
+
+    function saveFeedbackLocal(item){
+      DB.feedback = DB.feedback || [];
+      DB.feedback.push(item);
+      if (DB.feedback.length > 900) DB.feedback = DB.feedback.slice(-900);
+
+      const u = currentUser();
+      if (u){
+        u.feedback = u.feedback || [];
+        u.feedback.push(item);
+        if (u.feedback.length > 500) u.feedback = u.feedback.slice(-500);
+        addEvent(u, { type:'feedback', rating: item.rating, sentiment: item.sentiment });
+      }
+      audit('feedback_saved', { rating: item.rating, sentiment: item.sentiment });
+      saveDB();
+    }
+
+    async function submitFeedback(sendOut){
+      const u = currentUser();
+      if (!u) return requireAuth();
+      if (!Security.rateLimit('feedback:'+u.email, 6, 60_000)) return toast('تعداد ارسال زیاد است. کمی صبر کن.', 'warn');
+
+      const rating = feedbackRating;
+      const text = Security.sanitizeText($('#feedbackText').value, 1600);
+      if (!rating) return toast('لطفاً امتیاز ستاره‌ای را انتخاب کن.', 'warn');
+      if (text.length < 3) return toast('لطفاً یک متن کوتاه هم بنویس.', 'warn');
+
+      const item = {
+        id: randomHex(8),
+        t: Date.now(),
+        email: u.email,
+        rating,
+        text,
+        sentiment: sentiment(text),
+        dayKey: toDayKey(),
+        ua: navigator.userAgent
+      };
+
+      saveFeedbackLocal(item);
+      $('#feedbackStatus').textContent = 'ذخیره شد.';
+      successSound();
+
+      if (!sendOut){
+        toast('نظر ذخیره شد.', 'ok');
+        closeFeedback();
+        return;
+      }
+
+      const subject = `S English Feedback – ${rating}/5 – ${item.sentiment}`;
+      const bodyText = `Feedback received\n\nFrom: ${u.email}\nRating: ${rating}/5\nSentiment: ${item.sentiment}\nDate: ${new Date(item.t).toISOString()}\nDay: ${item.dayKey}\n\nMessage:\n${text}\n\n— S English (Ultra v3)`;
+
+      $('#feedbackStatus').textContent = 'در حال ارسال…';
+      const res = await sendEmail({ to: MAIL.toHidden, subject, text: bodyText, replyTo: u.email });
+      emailLog('feedback', MAIL.toHidden, res.ok, res.via, subject);
+      audit('feedback_send', { ok: res.ok, via: res.via, rating });
+
+      if (res.ok){
+        $('#feedbackStatus').textContent = 'ارسال شد.';
+        toast('نظر شما ارسال شد. ممنون!', 'ok', 3400);
+        closeFeedback();
+        return;
+      }
+
+      $('#feedbackStatus').textContent = 'نیاز به تایید ارسال';
+      toast('برای ارسال مستقیم، سرویس EmailJS/SMTPJS را در پنل مدیر فعال کن. فعلاً ایمیل آماده باز می‌شود.', 'warn', 5200);
+      try { await navigator.clipboard.writeText(bodyText); } catch(e) {}
+      openMailto(MAIL.toHidden, subject, bodyText);
+      closeFeedback();
+    }
+
+    $('#feedbackSend').addEventListener('click', ()=> submitFeedback(true));
+    $('#feedbackSaveOnly').addEventListener('click', ()=> submitFeedback(false));
+    feedbackModal.addEventListener('click', (e)=>{ if (e.target === feedbackModal) closeFeedback(); });
+
+    // ---------- Main Clock + Midnight refresh engine ----------
+    const mainClockEl = $('#mainClock');
+    const mainDateEl = $('#mainDate');
+    const mainDateShortEl = $('#mainDateShort');
+    const cd1 = $('#midnightCountdown');
+    const cd2 = $('#midnightCountdown2');
+    const todayKeyEl = $('#todayKey');
+    const phoneTimeEl = $('#phoneTime');
+
+    let lastDayKey = toDayKey();
+
+    function tickClock(){
+      const now = new Date();
+      const dayKey = toDayKey(now);
+      const nm = nextMidnight(now);
+      const countdown = msToHMS(nm - now);
+
+      mainClockEl.textContent = new Intl.DateTimeFormat('en-GB', {hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false}).format(now);
+      mainDateEl.textContent = fmtDate(now);
+      mainDateShortEl.textContent = fmtDateShort(now);
+      cd1.textContent = countdown;
+      cd2.textContent = countdown;
+      todayKeyEl.textContent = dayKey;
+      phoneTimeEl.textContent = fmtTime(now);
+
+      $('#auditPulse').textContent = String(DB.audit.length);
+
+      if (dayKey !== lastDayKey){
+        lastDayKey = dayKey;
+        onNewDay(dayKey);
+      }
+    }
+
+    function onNewDay(dayKey){
+      const user = currentUser();
+      if (user){
+        ensureDailyPlan(user, dayKey);
+        saveDB();
+      }
+      updateAllUI(true);
+      toast('۰۰:۰۰ — ۱۰ کلمه امروز به‌روزرسانی شد.', 'ok', 3400);
+      successSound();
+      audit('midnight_refresh', { dayKey });
+    }
+
+    setInterval(tickClock, 1000);
+    tickClock();
+
+    // ---------- Golden Time & Brain Load ----------
+    function updateBrainWidgets(){
+      const now = new Date();
+      const brain = circadianLoad(now);
+      const brainVal = clamp(brain, 8, 98);
+      setRing($('#brainRing'), clamp(brainVal, 12, 92), $('#brainVal'));
+      setRing($('#liveRing'), clamp(Math.round(brainVal*0.85), 8, 98), $('#liveVal'));
+
+      const vPhone = clamp(Math.round(brainVal*0.7 + Math.sin(Date.now()/700)*3), 5, 98);
+      $('#phoneBrain').style.setProperty('--val', vPhone);
+      $('#phoneBrainVal').textContent = vPhone + '%';
+
+      const golden = new Intl.DateTimeFormat('fa-IR', { hour:'2-digit', minute:'2-digit', hour12:false }).format(now);
+      $('#goldenTime').textContent = golden;
+      $('#goldenTimeSide').textContent = golden;
+
+      $('#forgetModel').textContent = `حافظه ۱ روزه: ${forgettingCurve(1)}% • ۳ روزه: ${forgettingCurve(3)}%`;
+
+      const tips = [
+        '۱ ست ۳ دقیقه‌ای – تمرکز عمیق و کوتاه',
+        'امروز ۶۰٪ مرور، ۴۰٪ جدید',
+        'Context-first: قبل از معنی، جمله بساز',
+        'بلند تکرار کن؛ تثبیت سریع‌تر',
+      ];
+      $('#todayTip').textContent = tips[Math.floor(Math.random()*tips.length)];
+      $('#stress').textContent = brainVal > 70 ? 'کمی بالا – ریتم را آرام کن' : brainVal < 35 ? 'پایین – بهترین زمان یادگیری' : 'متعادل';
+    }
+    setInterval(updateBrainWidgets, 1300);
+    updateBrainWidgets();
+
+    // ---------- Daily plan rendering ----------
+    function getTodayWords(){
+      const user = currentUser();
+      const dayKey = toDayKey();
+      if (!user) return [];
+      return ensureDailyPlan(user, dayKey);
+    }
+
+    function pickNextFocusWord(){
+      const user = currentUser();
+      const todays = getTodayWords();
+      if (!user || !todays.length) return null;
+
+      const now = Date.now();
+      const scored = todays.map(w=>{
+        const st = user.cards?.[w];
+        const due = st?.due || 0;
+        const isDue = due && due <= now;
+        const strength = strengthOfCard(st);
+        const novelty = st ? 0 : 1;
+        const wrong = st?.wrong || 0;
+        const score = (isDue ? 1200 : 0) + (novelty ? 280 : 0) + (100 - strength) + Math.min(24, wrong*3);
+        return { w, score };
+      }).sort((a,b)=> b.score - a.score);
+      return scored[0]?.w || todays[0];
+    }
+
+    function renderWords(){
+      const host = $('#wordList');
+      host.innerHTML = '';
+      const user = currentUser();
+      const todays = getTodayWords();
+
+      if (!user){
+        host.innerHTML = '<div class="text-xs text-white/70">برای دیدن ۱۰ کلمه امروز باید وارد شوی.</div>';
+        return;
+      }
+
+      todays.forEach((w)=>{
+        const it = BANK_BY_WORD[w];
+        const el = document.createElement('div');
+        el.className = 'rounded-2xl p-4 bg-white/5 border border-white/10 hover:bg-white/10 transition';
+
+        const st = user?.cards?.[w];
+        const dueTxt = st?.due ? new Intl.DateTimeFormat('fa-IR', { month:'2-digit', day:'2-digit' }).format(new Date(st.due)) : 'جدید';
+        const strength = strengthOfCard(st);
+
+        el.innerHTML = `
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-sm font-extrabold font-en" dir="ltr">${it.w}</div>
+              <div class="text-xs text-white/70">${it.m}</div>
+            </div>
+            <div class="text-lg">${it.emo}</div>
+          </div>
+          <div class="mt-3 text-xs text-white/85">${it.ctx} <span class="text-white/55">— ${it.fa}</span></div>
+          <div class="mt-3 flex flex-wrap items-center gap-2 text-[11px]">
+            <button data-word="${it.w}" class="focus-allowed say px-3 py-1.5 rounded-lg bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-black font-bold">صدا</button>
+            <div class="px-2 py-1 rounded bg-white/5 border border-white/10">Anchor: ${it.img}</div>
+            <div class="px-2 py-1 rounded bg-white/5 border border-white/10">Strength: ${strength}%</div>
+            <div class="px-2 py-1 rounded bg-white/5 border border-white/10">Due: ${dueTxt}</div>
+            <button class="focus-allowed remember px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10" data-word="${it.w}" data-known="true">بلدم</button>
+            <button class="focus-allowed remember px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10" data-word="${it.w}" data-known="false">تمرین</button>
+          </div>`;
+        host.appendChild(el);
+      });
+
+      const nextW = pickNextFocusWord();
+      const first = nextW ? BANK_BY_WORD[nextW] : null;
+      $('#nextWord').textContent = first?.w || '—';
+      $('#nextMeaning').textContent = first?.m || '—';
+      $('#nextEmotion').textContent = first ? `${first.emo} ${first.img}` : '—';
+    }
+
+    // ---------- Flashcards ----------
+    const cardsHost = $('#cards');
+
+    function makeCard(word, z){
+      const item = BANK_BY_WORD[word];
+      const el = document.createElement('div');
+      el.className = 'card absolute w-[270px] sm:w-[320px] h-[190px] sm:h-[240px] rounded-2xl bg-white/5 border border-white/10 backdrop-blur p-4 shadow-elev select-none';
+      el.style.transform = `translate(0,0) rotate(${(Math.random()*2-1)}deg)`;
+      el.style.zIndex = z;
+      el.innerHTML = `
+        <div class="flex items-start justify-between">
+          <div>
+            <div class="text-lg font-extrabold font-en" dir="ltr">${item.w}</div>
+            <div class="text-xs text-white/70">${item.m}</div>
+          </div>
+          <div class="text-2xl">${item.img}</div>
+        </div>
+        <div class="mt-3 text-xs text-white/75">${item.ctx}</div>
+        <div class="text-[11px] text-white/55">${item.fa}</div>
+        <div class="absolute bottom-3 inset-x-4 flex items-center justify-between text-xs">
+          <span class="text-white/65">چپ: تمرین • راست: بلدم</span>
+          <button class="focus-allowed say px-2 py-1 rounded bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-black" data-word="${item.w}">صدا</button>
+        </div>`;
+
+      let x=0,y=0, vx=0, vy=0, r=0, vr=0, active=false, startX=0, startY=0;
+      const onPointerDown = (e)=>{ active=true; startX=e.clientX; startY=e.clientY; el.setPointerCapture(e.pointerId); blip(560,.04); };
+      const onPointerMove = (e)=>{ if(!active) return; x = e.clientX-startX; y = e.clientY-startY; r = x/18; el.style.transform = `translate(${x}px, ${y}px) rotate(${r}deg)`; };
+      const onPointerUp = ()=>{
+        if(!active) return;
+        active=false;
+        if (x > 120){
+          successSound();
+          applyAnswer(item.w, true);
+          el.remove();
+        } else if (x < -120){
+          warnSound();
+          applyAnswer(item.w, false);
+          el.remove();
+        } else {
+          let ax = -x*0.12, ay = -y*0.12, ar = -r*0.15;
+          const step = ()=>{
+            vx += ax; vy += ay; vr += ar;
+            x += vx; y += vy; r += vr;
+            vx *= 0.70; vy *= 0.70; vr *= 0.70;
+            el.style.transform = `translate(${x}px, ${y}px) rotate(${r}deg)`;
+            if (Math.abs(x) > 0.5 || Math.abs(y) > 0.5) requestAnimationFrame(step);
+            else el.style.transform = 'translate(0,0) rotate(0deg)';
+          };
+          step();
+        }
+      };
+
+      el.addEventListener('pointerdown', onPointerDown);
+      window.addEventListener('pointermove', onPointerMove);
+      window.addEventListener('pointerup', onPointerUp);
+      return el;
+    }
+
+    function buildCards(){
+      const user = currentUser();
+      cardsHost.innerHTML = '';
+      if (!user) return;
+      const todays = getTodayWords();
+      const stack = [...todays].reverse();
+      stack.forEach((w,i)=> cardsHost.appendChild(makeCard(w, 100+i)));
+    }
+
+    // ---------- AI Panel ----------
+    const aiChat = $('#aiChat');
+    function aiPost(msg, target=aiChat){
+      const b = document.createElement('div');
+      b.className = 'p-3 rounded-xl ' + (msg.role==='user'
+        ? 'bg-[color:rgba(0,234,255,.12)] border border-[color:rgba(0,234,255,.18)]'
+        : 'bg-white/5 border border-white/10');
+      b.textContent = msg.text;
+      target.appendChild(b);
+      target.scrollTop = target.scrollHeight;
+    }
+
+    if (!aiChat.dataset.init){
+      aiChat.dataset.init = '1';
+      aiPost({ role:'assistant', text:'سلام! من S‑Mind هستم. آماده‌ای با ۳ دقیقه شروع کنیم؟' });
+    }
+
+    function updateAI(){
+      const user = currentUser();
+      if (!user){
+        $('#aiMemory').textContent = 'قفل است. ابتدا وارد شوید.';
+        $('#aiMotivation').textContent = 'تو می‌تونی؛ همین الان یک قدم.';
+        $('#aiDecision').textContent = '—';
+        $('#aiInsight').textContent = 'برای فعال‌سازی تصمیم‌گیری دقیق و ذخیره‌سازی، وارد شوید.';
+        return;
+      }
+
+      const total = user.progress.totalKnown + user.progress.totalPractice;
+      const weak = Object.entries(user.cards || {})
+        .sort((a,b)=> (strengthOfCard(a[1]) - strengthOfCard(b[1])))
+        .slice(0,3)
+        .map(([w])=>w);
+
+      $('#aiMemory').textContent = total
+        ? `Known: ${user.progress.totalKnown} • Practice: ${user.progress.totalPractice} • Weak: ${weak.join(', ')||'—'}`
+        : 'شروع کن تا الگوها کشف شوند.';
+
+      $('#aiMotivation').textContent = user.progress.streak
+        ? `🔥 Streak: ${user.progress.streak} روز • امروز فقط ۳ دقیقه کافیه.`
+        : 'اولین قدم، مسیر را روشن می‌کند.';
+
+      const due = dueCount(user);
+      const ms = masteryScore(user);
+      const decision = due > 6 ? 'مرور سنگین + آرام' : ms < 40 ? 'مرور+جمله‌سازی' : 'کلمات جدید + مرور فاصله‌دار';
+      $('#aiDecision').textContent = `Engine: ${decision} • Mastery: ${ms}% • Due: ${due}`;
+
+      const next = pickNextFocusWord();
+      $('#aiInsight').textContent = `کلمه بعدی پیشنهادی: ${next} • دلیل: (Due/Weak/New) • موتور تصمیم‌گیری فعال`;
+    }
+
+    $('#aiSend').addEventListener('click', ()=>{
+      const inp = $('#aiInput');
+      const val = Security.sanitizeText(inp.value, 220);
+      if (!val) return;
+      if (!currentUser()) return requireAuth();
+      if (!Security.rateLimit('chat:'+currentEmail(), 20, 60_000)) return toast('پیام زیاد ارسال شد. کمی صبر کن.', 'warn');
+
+      aiPost({ role:'user', text: val });
+      inp.value='';
+      blip(760,.05);
+
+      setTimeout(()=>{
+        const user = currentUser();
+        const dayKey = toDayKey();
+        const todays = getTodayWords();
+        const focus = pickNextFocusWord();
+        const w = BANK_BY_WORD[focus] || BANK_BY_WORD[todays[Math.floor(Math.random()*todays.length)]];
+
+        const reply = val.includes('چالش') || val.toLowerCase().includes('challenge')
+          ? `چالش: همین الان ۳ کلمه را در یک جمله واقعی استفاده کن: ${todays.slice(0,3).join(', ')}`
+          : val.includes('انگیزه')
+          ? 'تو می‌تونی. امروز فقط ۳ دقیقه؛ با همین شروع، نتیجه می‌سازی.'
+          : val.includes('تلفظ')
+          ? `برای تلفظ: کلمه «${w.w}» را سه بار آرام تکرار کن و سپس در جمله بگو.`
+          : val.includes('مشکل')
+          ? 'اگر مشکل در ورود/کد داری: پنل مدیر باید سرویس EmailJS/SMTPJS را فعال کند. در حالت دمو کد در صندوق داخلی نمایش داده می‌شود.'
+          : `پیشنهاد دقیق: برای «${w.w}» یک مثال شخصی بساز. نمونه: ${w.ctx}`;
+
+        aiPost({ role:'assistant', text: reply });
+        successSound();
+
+        if (user){
+          markActiveDay(user, dayKey);
+          user.progress.activeDays[dayKey].actions++;
+          addEvent(user, { type:'chat', text: val, dayKey });
+          audit('chat', { text: val.slice(0,120) });
+          saveDB();
+          updateAllUI();
+        }
+      }, 280);
+    });
+
+    $('#aiChallenge').addEventListener('click', ()=>{
+      if (!currentUser()) return requireAuth();
+      const todays = getTodayWords();
+      aiPost({ role:'assistant', text:`چالش: ۵ کلمه اول امروز را با صدای بلند بگو و برای هر کدام یک جمله کوتاه بساز: ${todays.slice(0,5).join(', ')}` });
+      blip(680,.05);
+      audit('ai_challenge');
+    });
+    $('#aiEncourage').addEventListener('click', ()=>{
+      if (!currentUser()) return requireAuth();
+      const lines = [
+        'تو می‌تونی. یک قدم کوچک همین الآن بردار.',
+        'امروز کامل بودن لازم نیست؛ فقط حضور کافیست.',
+        'سه دقیقه تمرکز، یک روز بهتر می‌سازد.',
+      ];
+      aiPost({ role:'assistant', text: lines[Math.floor(Math.random()*lines.length)] });
+      successSound();
+      audit('ai_encourage');
+    });
+    $('#aiAdjust').addEventListener('click', ()=>{
+      if (!currentUser()) return requireAuth();
+      aiPost({ role:'assistant', text:'سختی تمرین تنظیم شد: اگر بار شناختی بالا بود → مرور کوتاه‌تر، اگر پایین بود → کلمات جدید بیشتر.' });
+      blip(520,.05);
+      audit('ai_adjust');
+    });
+
+    // Voice Coach
+    const voiceBtn = $('#voicePractice');
+    const voiceStatus = $('#voiceStatus');
+    voiceBtn.addEventListener('click', ()=>{
+      if (!currentUser()) return requireAuth();
+      const focus = pickNextFocusWord();
+      const w = BANK_BY_WORD[focus] || BANK_BY_WORD[getTodayWords()[0]];
+      speak(`Repeat after me: ${w.w}. ${w.ctx}`, { lang:'en-US' });
+      voiceStatus.textContent = `تمرین: ${w.w}`;
+      successSound();
+      audit('voice_coach', { word: w.w });
+    });
+
+    // ---------- Progress Chart ----------
+    const canvas = $('#progressChart');
+    const ctx = canvas.getContext('2d');
+    function resizeChart(){ canvas.width = canvas.clientWidth; canvas.height = canvas.clientHeight; drawProgress(); }
+    new ResizeObserver(resizeChart).observe(canvas);
+
+    function drawGrid(){
+      ctx.save();
+      ctx.strokeStyle = 'rgba(255,255,255,.06)';
+      ctx.lineWidth = 1;
+      const stepX = Math.round(canvas.width/10);
+      for(let x=0; x<canvas.width; x+=stepX){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
+      for(let y=0; y<canvas.height; y+=28){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
+      ctx.restore();
+    }
+    function drawSeries(data, color){
+      ctx.save();
+      ctx.strokeStyle=color;
+      ctx.lineWidth=2.2;
+      ctx.beginPath();
+      const n=data.length;
+      const dx = canvas.width/Math.max(1,n-1);
+      const max = Math.max(10, ...data);
+      const min = 0;
+      for(let i=0;i<n;i++){
+        const x=i*dx;
+        const y = canvas.height - (data[i]-min)/(max-min) * (canvas.height-10) - 6;
+        i ? ctx.lineTo(x,y) : ctx.moveTo(x,y);
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function lastNDaysKeys(n=30){
+      const keys=[];
+      const d=new Date(); d.setHours(0,0,0,0);
+      for(let i=n-1;i>=0;i--){
+        const x=new Date(d); x.setDate(d.getDate()-i);
+        keys.push(toDayKey(x));
+      }
+      return keys;
+    }
+
+    function computeAvgKnownLast7(user){
+      const keys = lastNDaysKeys(7);
+      const arr = keys.map(k => user.progress.activeDays?.[k]?.known || 0);
+      const sum = arr.reduce((a,b)=>a+b,0);
+      return sum/7;
+    }
+
+    function drawProgress(){
+      if(!canvas.width) return;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      drawGrid();
+
+      const user = currentUser();
+      const keys = lastNDaysKeys(20);
+
+      if (!user){
+        const demo = keys.map((_,i)=> Math.round(2 + i*0.4 + Math.sin(i/2)*0.8));
+        const consist = keys.map((_,i)=> Math.round(1 + i*0.2));
+        drawSeries(demo, '#00eaff');
+        drawSeries(consist, '#ff37d6');
+        return;
+      }
+
+      let cum = 0;
+      const vocab = [];
+      const consist = [];
+      let streakLike = 0;
+      keys.forEach((k)=>{
+        const d = user.progress.activeDays?.[k];
+        cum += d ? d.known : 0;
+        vocab.push(cum);
+        streakLike += d ? 1 : 0;
+        consist.push(streakLike);
+      });
+      drawSeries(vocab, '#00eaff');
+      drawSeries(consist, '#ff37d6');
+    }
+
+    function updateBadges(){
+      const host = $('#badges');
+      host.innerHTML='';
+      const user = currentUser();
+      const p = user?.progress;
+
+      const known = p?.totalKnown || 0;
+      const streak = p?.streak || 0;
+      const total = (p?.totalKnown||0) + (p?.totalPractice||0);
+      const ms = user ? masteryScore(user) : 0;
+
+      const badges = [
+        { name:'Consistency Master', has: streak>=5, icon:'⏳', hint:'۵ روز حضور' },
+        { name:'Vocabulary Architect', has: known>=30, icon:'🏗️', hint:'۳۰ کلمه بلد' },
+        { name:'Language Warrior', has: total>=60, icon:'🛡️', hint:'۶۰ تعامل' },
+        { name:'Flow Keeper', has: streak>=12, icon:'🧘', hint:'۱۲ روز پیاپی' },
+        { name:'Mastery Aura', has: ms>=55, icon:'✨', hint:'Mastery ≥ 55%' },
+      ];
+      badges.forEach(b=>{
+        const el = document.createElement('div');
+        el.className='rounded-xl px-3 py-2 text-xs flex items-center gap-2 border ' + (b.has ? 'bg-emerald-500/10 border-emerald-400/20' : 'bg-white/5 border-white/10 opacity-50');
+        el.innerHTML = `<span>${b.icon}</span><span>${b.name}</span><span class="text-white/40">(${b.hint})</span>`;
+        host.appendChild(el);
+      });
+    }
+
+    function updatePrediction(){
+      const user = currentUser();
+      if (!user){
+        $('#avg7').textContent = '—';
+        $('#pred30').textContent = '—';
+        return;
+      }
+      const avg = computeAvgKnownLast7(user);
+      const projection = Math.round(user.progress.totalKnown + avg*30);
+      $('#avg7').textContent = avg.toFixed(2);
+      $('#pred30').textContent = `${projection} words`;
+    }
+
+    // ---------- Semantic Network ----------
+    const net = $('#network');
+    const nctx = net.getContext('2d');
+    function resizeNet(){ net.width = net.clientWidth; net.height = net.clientHeight; }
+    new ResizeObserver(resizeNet).observe(net);
+
+    let nodes = [];
+    let links = [];
+    let dragging = null;
+
+    function rebuildNetwork(){
+      const user = currentUser();
+      if (!user){ nodes=[]; links=[]; return; }
+      const todays = getTodayWords();
+      const list = todays.map(w => BANK_BY_WORD[w]).filter(Boolean);
+      const w = list.length;
+      nodes = list.map((x,i)=>({ id:i, x: Math.random()*0.8+0.1, y: Math.random()*0.75+0.12, vx:0, vy:0, label:x.w }));
+
+      const rng = seededRand('net|' + (currentEmail()||'guest') + '|' + toDayKey());
+      links = [];
+      for (let i=0;i<w;i++){
+        const connections = 2 + Math.floor(rng()*2);
+        for (let k=0;k<connections;k++){
+          const j = Math.floor(rng()*w);
+          if (j!==i) links.push({ a:i, b:j, l: 0.18 + rng()*0.12 });
+        }
+      }
+    }
+
+    function drawNet(){
+      const W = net.width, H = net.height;
+      if (!W || !H){ requestAnimationFrame(drawNet); return; }
+      nctx.clearRect(0,0,W,H);
+
+      links.forEach(L=>{
+        const A=nodes[L.a], B=nodes[L.b];
+        if (!A || !B) return;
+        const dx=(B.x-A.x), dy=(B.y-A.y);
+        const d=Math.sqrt(dx*dx+dy*dy)+1e-6;
+        const f=(d-L.l)*0.018;
+        const fx=f*dx/d, fy=f*dy/d;
+        A.vx += fx; A.vy += fy; B.vx -= fx; B.vy -= fy;
+      });
+      nodes.forEach(N=>{
+        N.vx *= 0.92; N.vy *= 0.92;
+        if(dragging!==N){ N.x += N.vx; N.y += N.vy; }
+        N.x = clamp(N.x, 0.06, 0.94);
+        N.y = clamp(N.y, 0.10, 0.92);
+      });
+
+      nctx.strokeStyle = 'rgba(255,255,255,.18)';
+      nctx.lineWidth = 1.15;
+      links.forEach(L=>{
+        const A=nodes[L.a], B=nodes[L.b];
+        if (!A || !B) return;
+        nctx.beginPath();
+        nctx.moveTo(A.x*W, A.y*H);
+        nctx.lineTo(B.x*W, B.y*H);
+        nctx.stroke();
+      });
+
+      nodes.forEach(N=>{
+        nctx.fillStyle = '#00eaff';
+        nctx.beginPath();
+        nctx.arc(N.x*W, N.y*H, 6, 0, Math.PI*2);
+        nctx.fill();
+        nctx.fillStyle = 'rgba(255,255,255,.88)';
+        nctx.font = '12px Inter, Vazirmatn, sans-serif';
+        nctx.textAlign = 'center';
+        nctx.fillText(N.label, N.x*W, N.y*H - 11);
+      });
+
+      requestAnimationFrame(drawNet);
+    }
+
+    const pt = (e)=>{ const r=net.getBoundingClientRect(); return { x:(e.clientX-r.left)/r.width, y:(e.clientY-r.top)/r.height }; };
+    net.addEventListener('pointerdown', e=>{
+      if (!currentUser()) return;
+      const p = pt(e);
+      let min = 1;
+      let pick = null;
+      nodes.forEach(n=>{
+        const d = Math.hypot(n.x-p.x, n.y-p.y);
+        if (d < min){ min=d; pick=n; }
+      });
+      if (min < 0.06){ dragging = pick; blip(520,.05); }
+    });
+    window.addEventListener('pointermove', e=>{ if(!dragging) return; const p = pt(e); dragging.x=p.x; dragging.y=p.y; });
+    window.addEventListener('pointerup', ()=>{ dragging=null; });
+
+    resizeNet();
+    rebuildNetwork();
+    drawNet();
+
+    // ---------- Memory cards ----------
+    function renderMemoryCards(){
+      const host = $('#memoryCards');
+      host.innerHTML = '';
+      const user = currentUser();
+      if (!user){
+        host.innerHTML = '<div class="text-xs text-white/70">بعد از ورود، کارت‌های حافظه ساخته می‌شوند.</div>';
+        return;
+      }
+      const todays = getTodayWords();
+      todays.slice(0,6).forEach(w=>{
+        const it = BANK_BY_WORD[w];
+        const el = document.createElement('div');
+        el.className = 'rounded-2xl p-4 bg-white/5 border border-white/10 hover:shine hover:bg-white/10 transition';
+        el.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="text-2xl">${it.img}</div>
+            <div>
+              <div class="text-sm font-en" dir="ltr">${it.w}</div>
+              <div class="text-xs text-white/70">${it.m}</div>
+            </div>
+          </div>`;
+        host.appendChild(el);
+      });
+    }
+
+    // ---------- Global click handlers ----------
+    document.addEventListener('click', (e)=>{
+      const t = e.target;
+      if (!(t instanceof HTMLElement)) return;
+
+      if (t.classList.contains('say')){
+        const w = t.dataset.word;
+        if (!w) return;
+        speak(w);
+        blip(920,.04);
+        audit('tts', { word: w });
+      }
+
+      if (t.classList.contains('remember')){
+        const word = t.dataset.word;
+        const known = t.dataset.known === 'true';
+        if (!currentUser()) return requireAuth();
+        applyAnswer(word, known);
+        known ? successSound() : warnSound();
+      }
+    });
+
+    $('#ttsBtn').addEventListener('click', ()=>{
+      if (!currentUser()) return requireAuth();
+      const focus = pickNextFocusWord();
+      if (!focus) return;
+      speak(focus);
+      successSound();
+      audit('tts_btn', { word: focus });
+    });
+
+    // Hero CTA
+    $('#heroStart').addEventListener('click', ()=>{
+      if (!currentUser()) return requireAuth();
+      window.location.hash = '#learn';
+      successSound();
+      audit('cta_start');
+    });
+    $('#miniStart').addEventListener('click', ()=>{
+      if (!currentUser()) return requireAuth();
+      window.location.hash = '#learn';
+      successSound();
+      audit('mini_start');
+    });
+    $('#miniLater').addEventListener('click', ()=>{
+      toast('باشه. هر وقت آماده بودی، فقط ۳ دقیقه.', 'info');
+      blip(560,.05);
+      audit('mini_later');
+    });
+
+    // ---------- Update UI ----------
+    function updateStatsCards(){
+      const user = currentUser();
+      if (!user){
+        $('#streakVal').textContent = '—';
+        $('#knownVal').textContent = '—';
+        $('#dueVal').textContent = '—';
+        $('#masteryVal').textContent = '—';
+        $('#motivationMini').textContent = 'برای استفاده از سیستم باید وارد شوی.';
+        return;
+      }
+      $('#streakVal').textContent = String(user.progress.streak || 0);
+      $('#knownVal').textContent = String(user.progress.totalKnown || 0);
+      $('#dueVal').textContent = String(dueCount(user));
+      $('#masteryVal').textContent = masteryScore(user) + '%';
+
+      const lines = [
+        'تو می‌تونی؛ فقط یک قدم کوچک دیگه.',
+        'یک جمله واقعی بساز، حافظه تثبیت می‌شود.',
+        'سه دقیقه تمرکز = یک روز بهتر.',
+        'امروز فقط حضور؛ فردا نتیجه.',
+      ];
+      $('#motivationMini').textContent = lines[Math.floor(Math.random()*lines.length)];
+    }
+
+    function updateAllUI(rebuild=false){
+      renderWords();
+      if (rebuild) buildCards();
+      updateAI();
+      updateBadges();
+      drawProgress();
+      updateStatsCards();
+      updatePrediction();
+      renderMemoryCards();
+      if (rebuild) rebuildNetwork();
+    }
+
+    // Save last location for resume
+    window.addEventListener('scroll', ()=>{
+      const user = currentUser();
+      if (!user) return;
+      user.progress.lastScrollY = window.scrollY;
+      if (!window.__saveScrollT){
+        window.__saveScrollT = setTimeout(()=>{
+          window.__saveScrollT = null;
+          saveDB();
+        }, 700);
+      }
+    }, { passive: true });
+
+    // Intersection animations
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(ent=>{
+        if(ent.isIntersecting){
+          ent.target.classList.add('opacity-100','translate-y-0');
+          ent.target.classList.remove('opacity-0','translate-y-4');
+        }
+      });
+    }, { threshold: 0.12 });
+    $$('.section').forEach(sec=>{
+      sec.classList.add('opacity-0','translate-y-4','transition','duration-700');
+      io.observe(sec);
+    });
+
+    // close modals by clicking backdrop
+    authModal.addEventListener('click', (e)=>{ if (e.target === authModal) closeAuth(); });
+
+    // ---------- Assistant ----------
+    const assistantModal = $('#assistantModal');
+    const assistantChat = $('#assistantChat');
+    function openAssistant(){
+      if (!currentUser()) return requireAuth();
+      assistantModal.dataset.open = 'true';
+      assistantModal.setAttribute('aria-hidden','false');
+      $('#assistantInput').focus();
+      blip(740,.05);
+    }
+    function closeAssistant(){
+      assistantModal.dataset.open = 'false';
+      assistantModal.setAttribute('aria-hidden','true');
+    }
+    $('#assistantOpen').addEventListener('click', openAssistant);
+    $('#assistantClose').addEventListener('click', closeAssistant);
+    assistantModal.addEventListener('click', (e)=>{ if (e.target === assistantModal) closeAssistant(); });
+
+    if (!assistantChat.dataset.init){
+      assistantChat.dataset.init = '1';
+      aiPost({ role:'assistant', text:'سلام! من دستیار S‑Mind هستم. درباره سایت یا مسیر یادگیری ازم بپرس.' }, assistantChat);
+    }
+
+    $('#assistantSend').addEventListener('click', ()=>{
+      const user = currentUser();
+      if (!user) return requireAuth();
+      const inp = $('#assistantInput');
+      const val = Security.sanitizeText(inp.value, 220);
+      if (!val) return;
+      if (!Security.rateLimit('assistant:'+user.email, 20, 60_000)) return toast('پیام زیاد ارسال شد. کمی صبر کن.', 'warn');
+
+      aiPost({ role:'user', text: val }, assistantChat);
+      inp.value='';
+      blip(760,.05);
+
+      setTimeout(()=>{
+        const topicBlock = ['سیاست','رمز','کد مدیر','نفوذ','هک','backdoor','کلید','token'];
+        const v = val.toLowerCase();
+        if (topicBlock.some(x=>v.includes(x))){
+          aiPost({ role:'assistant', text:'برای امنیت سیستم، درباره اطلاعات حساس/مدیریتی پاسخ داده نمی‌شود. اگر مشکل فنی داری، دقیق توضیح بده تا راهنمایی کنم.' }, assistantChat);
+          warnSound();
+          audit('assistant_blocked', { q: val.slice(0,80) });
+          return;
+        }
+
+        const reply = v.includes('کد') && v.includes('نمی')
+          ? 'برای «ارسال واقعی کد به ایمیل» باید EmailJS/SMTPJS در پنل مدیر فعال باشد. در حالت دمو، کد در صندوق داخلی و کلیپ‌بورد قرار می‌گیرد.'
+          : v.includes('شروع')
+          ? 'پیشنهاد: از بخش Daily Learning شروع کن. ۵ فلش‌کارت را بکش و ۱ دقیقه تلفظ.'
+          : v.includes('پیشرفت')
+          ? 'پیشرفت تو با SM‑2 ذخیره می‌شود: Streak، Known، Due و Mastery. اگر هر روز فقط ۳ دقیقه باشی، ۳۰ روز بعد جهش حس می‌کنی.'
+          : 'من اینجام: سؤال دقیق بپرس (مثلاً: بهترین راه برای حفظ این ۱۰ کلمه امروز چیست؟).';
+
+        aiPost({ role:'assistant', text: reply }, assistantChat);
+        successSound();
+        audit('assistant_reply', { q: val.slice(0,80) });
+      }, 240);
+    });
+
+    // ---------- Admin Panel ----------
+    const adminModal = $('#adminModal');
+    function openAdmin(){
+      if (!isAdmin()) return;
+      adminModal.dataset.open = 'true';
+      adminModal.setAttribute('aria-hidden','false');
+      renderAdmin();
+      setAdminTab('users');
+      blip(760,.05);
+      audit('admin_open');
+    }
+    function closeAdmin(){
+      adminModal.dataset.open = 'false';
+      adminModal.setAttribute('aria-hidden','true');
+    }
+    adminBtn.addEventListener('click', openAdmin);
+    $('#adminClose').addEventListener('click', closeAdmin);
+    adminModal.addEventListener('click', (e)=>{ if (e.target === adminModal) closeAdmin(); });
+
+    function setAdminTab(name){
+      $$('.adminPanel').forEach(p=>p.classList.add('hidden'));
+      $('#adminTab_'+name)?.classList.remove('hidden');
+      $$('.adminTab').forEach(b=> b.classList.toggle('bg-white/10', b.dataset.tab===name));
+    }
+    $$('.adminTab').forEach(b=> b.addEventListener('click', ()=> setAdminTab(b.dataset.tab)));
+
+    function renderTable(rows, cols){
+      const wrap = document.createElement('div');
+      wrap.className = 'min-w-[900px]';
+      const table = document.createElement('table');
+      table.className = 'w-full text-xs';
+      table.innerHTML = `
+        <thead class="bg-white/5">
+          <tr>${cols.map(c=>`<th class="text-right px-3 py-2 font-semibold text-white/80">${c.label}</th>`).join('')}</tr>
+        </thead>
+        <tbody>
+          ${rows.map(r=>`<tr class="border-t border-white/10 hover:bg-white/5">${cols.map(c=>`<td class="px-3 py-2 align-top text-white/80">${c.render(r)}</td>`).join('')}</tr>`).join('')}
+        </tbody>`;
+      wrap.appendChild(table);
+      const container = document.createElement('div');
+      container.className = 'overflow-auto';
+      container.appendChild(wrap);
+      return container;
+    }
+
+    function renderAdmin(){
+      if (!isAdmin()) return;
+
+      // USERS
+      const search = ($('#adminUserSearch').value||'').toLowerCase().trim();
+      const filter = $('#adminUserFilter').value;
+      // Users are ephemeral in this mode; admin visibility comes from persistent Ledger
+      const L = ledgerLoad();
+      const users = Object.values(L.users || {});
+
+      // Presence summary (from full ledger, not filtered search)
+      const presStats = { online:0, offline:0, logout:0, unknown:0, started:0, registered:0 };
+      users.forEach(u=>{
+        const p = presenceLabel(u).key;
+        presStats[p] = (presStats[p]||0) + 1;
+        if (u.startedAt) presStats.started++;
+        if (u.registeredAt) presStats.registered++;
+      });
+      const sumEl = $('#adminPresenceSummary');
+      if (sumEl){
+        sumEl.textContent = `Total: ${users.length} • Online: ${presStats.online} • Offline: ${presStats.offline} • Logged out: ${presStats.logout} • Started: ${presStats.started} • Registered: ${presStats.registered}`;
+      }
+
+      const filtered = users.filter(u=>{
+        const match = !search || (u.email.includes(search) || (u.name||'').toLowerCase().includes(search));
+        if (!match) return false;
+
+        const pres = presenceLabel(u).key;
+        const startedOnly = !!u.startedAt && !u.registeredAt;
+
+        if (filter==='online') return pres === 'online';
+        if (filter==='offline') return pres === 'offline';
+        if (filter==='logout') return pres === 'logout';
+        if (filter==='started') return startedOnly;
+
+        if (filter==='active') return u.accountStatus==='active';
+        if (filter==='suspended') return u.accountStatus==='suspended';
+        if (filter==='admin') return u.role==='admin';
+        if (filter==='all') return true;
+        return true;
+      }).sort((a,b)=> (b.lastSeenAt||0) - (a.lastSeenAt||0));
+
+      const userCols = [
+        { label:'Email', render:(u)=> `<span class="font-en" dir="ltr">${u.email}</span>` },
+        { label:'Name', render:(u)=> Security.sanitizeText(u.name||'', 40) || '—' },
+        { label:'Role', render:(u)=> u.role || 'user' },
+        { label:'Account', render:(u)=> u.accountStatus || 'active' },
+        { label:'Presence', render:(u)=>{
+          const p = presenceLabel(u);
+          const cls = p.key==='online' ? 'text-emerald-300' : p.key==='logout' ? 'text-amber-300' : 'text-white/70';
+          return `<div class="${cls}"><span class="font-en" dir="ltr">${p.text}</span> <span class="text-white/40">(${p.hint})</span></div>`;
+        }},
+        { label:'Started', render:(u)=> u.startedAt ? new Date(u.startedAt).toLocaleString('fa-IR') : '—' },
+        { label:'Registered', render:(u)=> u.registeredAt ? new Date(u.registeredAt).toLocaleString('fa-IR') : '—' },
+        { label:'Last Seen', render:(u)=> u.lastSeenAt ? new Date(u.lastSeenAt).toLocaleString('fa-IR') : '—' },
+        { label:'Left At', render:(u)=> u.leftAt ? new Date(u.leftAt).toLocaleString('fa-IR') : '—' },
+        { label:'Last Logout', render:(u)=> u.lastLogoutAt ? new Date(u.lastLogoutAt).toLocaleString('fa-IR') : '—' },
+        { label:'Sessions', render:(u)=> `<span class="font-en" dir="ltr">${u.sessions||0}</span>` },
+        { label:'Actions', render:(u)=>{
+          const btn = (u.accountStatus||'active')==='active'
+            ? `<button class="focus-allowed px-2 py-1 rounded bg-white/5 border border-white/10 hover:bg-white/10" data-admin="suspend" data-email="${u.email}">Suspend</button>`
+            : `<button class="focus-allowed px-2 py-1 rounded bg-white/5 border border-white/10 hover:bg-white/10" data-admin="activate" data-email="${u.email}">Activate</button>`;
+          return btn;
+        }},
+      ];
+      const uHost = $('#adminUsers');
+      uHost.innerHTML = '';
+      uHost.appendChild(renderTable(filtered, userCols));
+
+      // AUDIT
+      const aud = (DB.audit||[]).slice().reverse().slice(0, 800);
+      const auditCols = [
+        { label:'Time', render:(a)=> new Date(a.t).toLocaleString('fa-IR') },
+        { label:'Type', render:(a)=> a.type },
+        { label:'Email', render:(a)=> a.email ? `<span class="font-en" dir="ltr">${a.email}</span>` : '—' },
+        { label:'Meta', render:(a)=> `<span class="font-en" dir="ltr">${Security.sanitizeText(JSON.stringify(a.meta||{}), 140)}</span>` },
+      ];
+      const aHost = $('#adminAudit');
+      aHost.innerHTML='';
+      aHost.appendChild(renderTable(aud, auditCols));
+
+      // SECURITY
+      const sec = (DB.security||[]).slice().reverse().slice(0, 600);
+      const secCols = [
+        { label:'Time', render:(s)=> new Date(s.t).toLocaleString('fa-IR') },
+        { label:'Level', render:(s)=> s.level },
+        { label:'Event', render:(s)=> s.evt },
+        { label:'Email', render:(s)=> s.email ? `<span class="font-en" dir="ltr">${s.email}</span>` : '—' },
+        { label:'Meta', render:(s)=> `<span class="font-en" dir="ltr">${Security.sanitizeText(JSON.stringify(s.meta||{}), 160)}</span>` },
+      ];
+      const sHost = $('#adminSecurity');
+      sHost.innerHTML='';
+      sHost.appendChild(renderTable(sec, secCols));
+
+      const sysRisk = Security.riskScore(Security.get().events || []);
+      $('#adminSysRisk').textContent = sysRisk + '/100';
+      $('#adminSysRiskHint').textContent = sysRisk > 60 ? 'High: بررسی OTP و Rate Limit' : sysRisk > 30 ? 'Medium: تحت نظر' : 'Low: عادی';
+      const last = sec[0];
+      $('#adminLastSec').textContent = last ? `${last.level} • ${last.evt}` : '—';
+      $('#adminSecSuggest').textContent = sysRisk > 50 ? 'سرویس ایمیل را فعال کنید + محدودیت‌ها را سخت‌تر کنید.' : 'فعلاً مناسب است. برای سطح بانکی Backend لازم است.';
+
+      // EMAILS
+      const em = (DB.emails||[]).slice().reverse().slice(0, 600);
+      const emCols = [
+        { label:'Time', render:(m)=> new Date(m.t).toLocaleString('fa-IR') },
+        { label:'Kind', render:(m)=> m.kind },
+        { label:'To', render:(m)=> `<span class="font-en" dir="ltr">${m.to}</span>` },
+        { label:'OK', render:(m)=> m.ok ? '✅' : '❌' },
+        { label:'Via', render:(m)=> m.via },
+        { label:'Subject', render:(m)=> Security.sanitizeText(m.subject||'', 80) },
+      ];
+      const eHost = $('#adminEmails');
+      eHost.innerHTML='';
+      eHost.appendChild(renderTable(em, emCols));
+
+      // FEEDBACK
+      const fb = (DB.feedback||[]).slice().reverse().slice(0, 600);
+      const fbCols = [
+        { label:'Time', render:(f)=> new Date(f.t).toLocaleString('fa-IR') },
+        { label:'Email', render:(f)=> `<span class="font-en" dir="ltr">${f.email}</span>` },
+        { label:'Rating', render:(f)=> `<span class="font-en" dir="ltr">${f.rating}/5</span>` },
+        { label:'Sentiment', render:(f)=> f.sentiment || '—' },
+        { label:'Text', render:(f)=> Security.sanitizeText(f.text||'', 160) },
+      ];
+      const fHost = $('#adminFeedback');
+      fHost.innerHTML='';
+      fHost.appendChild(renderTable(fb, fbCols));
+
+      // SETTINGS (populate)
+      $('#cfgEmailjsEnabled').value = String(!!MAIL.emailjs.enabled);
+      $('#cfgEmailjsPublic').value = MAIL.emailjs.publicKey || '';
+      $('#cfgEmailjsService').value = MAIL.emailjs.serviceId || '';
+      $('#cfgEmailjsTemplate').value = MAIL.emailjs.templateId || '';
+
+      $('#cfgSmtpEnabled').value = String(!!MAIL.smtpjs.enabled);
+      $('#cfgSmtpToken').value = MAIL.smtpjs.secureToken || '';
+    }
+
+    $('#adminUserSearch').addEventListener('input', ()=> renderAdmin());
+    $('#adminUserFilter').addEventListener('change', ()=> renderAdmin());
+
+    document.addEventListener('click', (e)=>{
+      const t = e.target;
+      if (!(t instanceof HTMLElement)) return;
+      if (!isAdmin()) return;
+      if (t.dataset.admin === 'suspend'){
+        const email = t.dataset.email;
+        // Ephemeral user object may not exist; ledger is the source of truth for admin visibility
+        if (DB.users[email]) DB.users[email].status = 'suspended';
+        ledgerSetAccountStatus(email, 'suspended');
+        saveDB();
+        audit('admin_suspend', { email });
+        securityLog('warn', 'admin_suspend', { email });
+        renderAdmin();
+        toast('کاربر suspend شد.', 'warn');
+      }
+      if (t.dataset.admin === 'activate'){
+        const email = t.dataset.email;
+        if (DB.users[email]) DB.users[email].status = 'active';
+        ledgerSetAccountStatus(email, 'active');
+        saveDB();
+        audit('admin_activate', { email });
+        securityLog('info', 'admin_activate', { email });
+        renderAdmin();
+        toast('کاربر فعال شد.', 'ok');
+      }
+    });
+
+    $('#adminClearAudit').addEventListener('click', ()=>{
+      if (!isAdmin()) return;
+      DB.audit = [];
+      saveDB();
+      audit('admin_clear_audit');
+      toast('Audit پاک شد (فقط این مرورگر).', 'warn');
+      renderAdmin();
+    });
+
+    $('#adminExport').addEventListener('click', ()=>{
+      if (!isAdmin()) return;
+      const blob = new Blob([JSON.stringify(DB, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `senglish_backup_${toDayKey()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      audit('admin_export');
+      toast('Export انجام شد.', 'ok');
+    });
+
+    $('#adminImport').addEventListener('change', async (ev)=>{
+      if (!isAdmin()) return;
+      const f = ev.target.files?.[0];
+      if (!f) return;
+      try {
+        const text = await f.text();
+        const obj = JSON.parse(text);
+        if (!obj || typeof obj !== 'object') throw new Error('Invalid');
+        // Replace local DB
+        Object.assign(DB, obj);
+        saveDB();
+        audit('admin_import');
+        toast('Import انجام شد.', 'ok');
+        renderAdmin();
+        updateAllUI(true);
+      } catch(e){
+        toast('Import ناموفق.', 'bad');
+        securityLog('warn','admin_import_fail', { msg: String(e?.message||e) });
+      }
+    });
+
+    $('#cfgSave').addEventListener('click', ()=>{
+      if (!isAdmin()) return;
+      MAIL.emailjs.enabled = $('#cfgEmailjsEnabled').value === 'true';
+      MAIL.emailjs.publicKey = Security.sanitizeText($('#cfgEmailjsPublic').value, 120);
+      MAIL.emailjs.serviceId = Security.sanitizeText($('#cfgEmailjsService').value, 120);
+      MAIL.emailjs.templateId = Security.sanitizeText($('#cfgEmailjsTemplate').value, 120);
+
+      MAIL.smtpjs.enabled = $('#cfgSmtpEnabled').value === 'true';
+      MAIL.smtpjs.secureToken = Security.sanitizeText($('#cfgSmtpToken').value, 240);
+
+      const ok = saveMailCfg();
+      $('#cfgStatus').textContent = ok ? 'Saved.' : 'Save failed.';
+      toast(ok ? 'تنظیمات ذخیره شد.' : 'ذخیره تنظیمات ناموفق بود.', ok ? 'ok' : 'bad');
+      audit('admin_save_settings', { emailjs: MAIL.emailjs.enabled, smtpjs: MAIL.smtpjs.enabled });
+    });
+
+    $('#cfgReset').addEventListener('click', ()=>{
+      if (!isAdmin()) return;
+      localStorage.removeItem(MAILCFG_KEY);
+      MAIL.emailjs = { enabled:false, publicKey:'', serviceId:'', templateId:'' };
+      MAIL.smtpjs = { enabled:false, secureToken:'' };
+      $('#cfgStatus').textContent = 'Reset.';
+      toast('تنظیمات ریست شد.', 'warn');
+      audit('admin_reset_settings');
+      renderAdmin();
+    });
+
+    $('#adminTestEmail').addEventListener('click', async ()=>{
+      if (!isAdmin()) return;
+      const subject = 'S English – Test Email';
+      const text = `Test email from S English v3\nTime: ${new Date().toISOString()}\n\nIf you received this, OTP delivery can be real.`;
+      const res = await sendEmail({ to: ADMIN_EMAIL, subject, text, replyTo: ADMIN_EMAIL });
+      emailLog('admin_test', ADMIN_EMAIL, res.ok, res.via, subject);
+      audit('admin_test_email', { ok: res.ok, via: res.via });
+      toast(res.ok ? 'تست ایمیل ارسال شد.' : 'ارسال تست ناموفق (سرویس فعال نیست).', res.ok ? 'ok' : 'warn');
+      renderAdmin();
+    });
+
+    // ---------- Presence Heartbeat (Admin visibility) ----------
+    function startPresenceLoop(){
+      setInterval(()=>{
+        const u = currentUser();
+        if (!u) return;
+        ledgerTouch(u.email);
+      }, 12_000);
+    }
+
+    document.addEventListener('visibilitychange', ()=>{
+      const u = currentUser();
+      if (!u) return;
+      if (document.visibilityState === 'hidden'){
+        ledgerMarkLeft(u.email);
+        audit('visibility_hidden');
+        securityLog('info','presence_hidden', { email: u.email });
+      } else {
+        ledgerTouch(u.email);
+        audit('visibility_visible');
+        securityLog('info','presence_visible', { email: u.email });
+      }
+    });
+
+    window.addEventListener('beforeunload', ()=>{
+      const u = currentUser();
+      if (!u) return;
+      ledgerMarkLeft(u.email);
+      try { navigator.sendBeacon?.('about:blank', ''); } catch(e) {}
+    });
+
+    // ---------- First boot ----------
+    function boot(){
+      applyAuthState();
+      if (currentUser()){
+        lockOverlay.style.display = 'none';
+        ensureDailyPlan(currentUser(), toDayKey());
+        saveDB();
+        updateAllUI(true);
+        ledgerTouch(currentUser().email);
+        audit('boot', { auth:true, v: DB.v, ephemeral: EPHEMERAL_MODE });
+      } else {
+        lockOverlay.style.display = 'block';
+        audit('boot', { auth:false, v: DB.v, ephemeral: EPHEMERAL_MODE });
+      }
+      Security.log('boot', { auth: !!currentUser(), v: DB.v, ephemeral: EPHEMERAL_MODE });
+      startPresenceLoop();
+    }
+    boot();
+
+    // update UI in case of theme switch
+    updateAllUI(true);
+
+  </script>
+</body>
+</html>
